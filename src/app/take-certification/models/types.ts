@@ -5,6 +5,7 @@ export interface BahanBakuAddition {
 
 export interface BahanBakuData {
   kode: string;
+  kode_lini_produksi: string;
   lini_produksi: string;
   nama: string;
   tipe_bahan_baku: string;

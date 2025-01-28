@@ -8,8 +8,16 @@ const apiClient = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-export const fetchBahanBaku = (uuidTransaksi: string) =>
-  apiClient.post('/bahan-baku-utama/get', { uuid_transaksi: uuidTransaksi });
+export interface ApiResponse<T> {
+  code: number;
+  message: string;
+  data: T;
+}
+
+export const fetchBahanBaku = async (uuidTransaksi: string): Promise<ApiResponse<BahanBakuData[]>> => {
+  const response = await apiClient.post('/bahan-baku-utama/get', { uuid_transaksi: uuidTransaksi });
+  return response.data;
+};
 
 export const updateBahanBaku = (data: BahanBakuData) =>
   apiClient.post('/bahan-baku-utama/update', data);
