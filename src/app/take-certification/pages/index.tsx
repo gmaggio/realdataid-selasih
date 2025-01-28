@@ -26,10 +26,11 @@ const TakeCertificationPage = () => {
 
   return (
     <div>
-      <h1>Bahan Baku</h1>
-      {data.map((item, index) => (
-        <div key={index}>{item.nama}</div>
-      ))}
+      <div>sidebar</div>
+      <div>
+        <div>header</div>
+        <div>content</div>
+      </div>
     </div>
   );
 };
