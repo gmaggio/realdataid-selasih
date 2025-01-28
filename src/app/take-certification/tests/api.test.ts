@@ -4,6 +4,7 @@ jest.mock('../services/api', () => ({
   fetchBahanBaku: jest.fn(),
 }));
 
+
 const mockData = [
   {
     kode: '00000000-0000-0000-0000-000000001111',

@@ -1,20 +1,17 @@
 import { BahanBakuData } from '@/app/take-certification/models/types';
+import { ApiResponse } from '@/core/types/ApiResponse';
 import axios from 'axios';
 
 const API_BASE_URL = 'http://kemenperin.dev-rdi.tech:8001/perusahaan/take-certification';
+const MOCK_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${MOCK_TOKEN}`,
+  },
 });
-
-export interface ApiResponse<T> {
-  code: number;
-  message: string;
-  data: T;
-}
-
-
 
 // Get Lini Produksi
 // TODO: Update `unknown` to match the response data type
@@ -26,6 +23,12 @@ export const fetchLiniProduksi = async (uuidTransaksi: string): Promise<ApiRespo
 // Fetch Bahan Baku
 export const fetchBahanBaku = async (uuidTransaksi: string): Promise<ApiResponse<BahanBakuData[]>> => {
   const response = await apiClient.post('/bahan-baku-utama/get', { uuid_transaksi: uuidTransaksi });
+  return response.data;
+};
+
+// Save Bahan Baku
+export const postBahanBaku = async (data: BahanBakuData): Promise<ApiResponse<BahanBakuData>> => {
+  const response = await apiClient.post('/bahan-baku-utama/post', data);
   return response.data;
 };
 
