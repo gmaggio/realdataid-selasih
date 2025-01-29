@@ -13,7 +13,7 @@ const TakeCertificationPage: React.FC<TakeCertificationProps> = ({
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  return <Screen></Screen>;
+  return <Screen />;
 };
 
 export default TakeCertificationPage;

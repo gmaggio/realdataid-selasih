@@ -5,6 +5,100 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --layer-radius: 10px;
+  --layer-bg: var(--color-bg-surface);
+}
+
+@theme {
+  /* Primitive Colors */
+
+  --color-logo-green-dark: oklch(0.36 0.07 152.81 / 1);
+  --color-logo-green: oklch(0.5 0.13 152.33 / 1);
+  --color-logo-green-light: oklch(0.66 0.16 140.03 / 1);
+  --color-logo-green-accent: oklch(0.83 0.18 118.27 / 1);
+
+  --color-primary-500: oklch(0.65 0.11 190.08 / 1);
+  --color-primary-300: oklch(0.93 0.03 191.41 / 1);
+  --color-primary-100: oklch(0.98 0.01 180.72 / 1);
+
+  --color-neutral-900: oklch(0.32 0 0 / 1);
+  --color-neutral-700: oklch(0.41 0.01 243.07 / 1);
+  --color-neutral-500: oklch(0.63 0.01 244.37 / 1);
+  --color-neutral-300: oklch(0.77 0.01 248.02 / 1);
+  --color-neutral-100: oklch(0.94 0.01 247.88 / 1);
+
+  --color-blue-900: oklch(0.44 0.06 249.2 / 1);
+  --color-blue-300: oklch(0.95 0.02 258.36 / 1);
+  --color-blue-100: oklch(0.98 0.01 236.62 / 1);
+
+  --color-base-white: oklch(1 0 0 / 1);
+  --color-support-red: oklch(0.59 0.2 21.63 / 1);
+
+  /* Token Colors */
+
+  --color-menu-base: var(--color-neutral-700);
+  --color-menu-active: var(--color-primary-500);
+  --color-menu-bg: var(--color-primary-300);
+
+  --color-button-primary: var(--color-primary-500);
+  --color-button-secondary: var(--color-primary-300);
+  --color-button-tertiary: var(--color-neutral-700);
+  --color-button-support: var(--color-primary-300);
+
+  --color-text-body: var(--color-neutral-700);
+  --color-text-body2: var(--color-neutral-500);
+  --color-text-heading: var(--color-neutral-900);
+  --color-text-hilite: var(--color-primary-500);
+  --color-text-onDark: var(--color-base-white);
+
+  --color-bg-canvas: var(--color-primary-100);
+  --color-bg-surface: var(--color-base-white);
+  --color-bg-surface2: var(--color-primary-300);
+
+  --color-table-heading: var(--color-blue-900);
+  --color-table-headerBg: var(--color-blue-100);
+  --color-table-headerBorder: var(--color-blue-300);
+
+  --color-border-primary: var(--color-neutral-300);
+  --color-border-secondary: var(--color-neutral-100);
+  --color-border-tertiary: var(--color-primary-500);
+
+  --color-semantic-important: var(--color-support-red);
+
+  /* Layout Styles */
+
+  --font-inter: Inter;
+  --font-sans: var(--font-inter, sans-serif);
+
+  --font-body: var(--font-sans);
+
+  --text-xs: 0.5625rem;
+  --text-xs--line-height: calc(1 / 0.5625);
+  --text-sm: 0.625rem;
+  --text-sm--line-height: calc(1 / 0.625);
+  --text-base: 0.75rem;
+  --text-base--line-height: calc(1 / 0.75);
+  --text-lg: 0.875rem;
+  --text-lg--line-height: calc(1.25 / 0.875);
+  --text-xl: 1rem;
+  --text-xl--line-height: calc(1.5 / 1);
+  --text-2xl: 1.125rem;
+  --text-2xl--line-height: calc(1.75 / 1.125);
+  --text-3xl: 1.5rem;
+  --text-3xl--line-height: calc(2 / 1.5);
+  --text-4xl: 1.875rem;
+  --text-4xl--line-height: calc(2.25 / 1.875);
+  --text-5xl: 2.25rem;
+  --text-5xl--line-height: calc(2.5 / 2.25);
+  --text-6xl: 3rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 3.75rem;
+  --text-7xl--line-height: 1;
+  --text-8xl: 4.5rem;
+  --text-8xl--line-height: 1;
+  --text-9xl: 6rem;
+  --text-9xl--line-height: 1;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,8 +108,11 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    /* color: var(--color-text-body);
+    background: var(--color-bg-canvas);
+    font-family: var(--font-body); */
+    /* @apply bg-bg- */
+  }
 }
