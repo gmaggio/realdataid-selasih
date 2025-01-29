@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BahanBakuData } from '@/app/take-certification/models/types';
-import { fetchBahanBaku } from '@/app/take-certification/services/BahanBakuService';
+import { getBahanBakuData } from '@/app/take-certification/services/BahanBakuService';
 
 export const useBahanBakuData = (uuidTransaksi: string) => {
   const [data, setData] = useState<BahanBakuData[]>([]);
@@ -10,8 +10,8 @@ export const useBahanBakuData = (uuidTransaksi: string) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const fetchedData = await fetchBahanBaku(uuidTransaksi);
-        setData(fetchedData.data);
+        const fetchedData = await getBahanBakuData(uuidTransaksi);
+        setData(fetchedData);
       } catch (err) {
         console.error(err);
         setError('Failed to fetch data');

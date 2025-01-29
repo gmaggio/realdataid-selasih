@@ -1,11 +1,12 @@
-import { fetchBahanBaku } from "@/app/take-certification/services/BahanBakuService";
+import { BahanBakuData } from "@/app/take-certification/models/types";
+import { ApiResponse } from "@/core/types/ApiResponse";
+import { AxiosResponse } from "axios";
 
-jest.mock('../services/api', () => ({
-  fetchBahanBaku: jest.fn(),
-}));
+// Mock data for Bahan Baku
+export const mockTransactionID = '11aa0000-0000-0000-0000-000000000000';
 
-
-const mockData = [
+// Mock data for Bahan Baku
+export const mockBahanBakuData: BahanBakuData[] = [
   {
     kode: '00000000-0000-0000-0000-000000001111',
     kode_lini_produksi: '00000000-0000-0000-0000-00000000aaaa',
@@ -29,7 +30,7 @@ const mockData = [
     bulan_11: '0',
     bulan_12: '0',
     total_penggunaan: '12',
-    kode_transaksi_id: '11aa0000-0000-0000-0000-000000000000',
+    kode_transaksi_id: mockTransactionID,
     uuid_user: '00000000-0000-0000-0000-000123456789',
   },
   {
@@ -55,27 +56,21 @@ const mockData = [
     bulan_11: '0',
     bulan_12: '0',
     total_penggunaan: '12',
-    kode_transaksi_id: '11aa0000-0000-0000-0000-000000000000',
+    kode_transaksi_id: mockTransactionID,
     uuid_user: '00000000-0000-0000-0000-000123456789',
   },
 ];
 
 
-describe('API Tests', () => {
-  it('handles fetched data successfully', async () => {
-
-    const mockedFetchBahanBaku = fetchBahanBaku as jest.MockedFunction<typeof fetchBahanBaku>;
-
-    mockedFetchBahanBaku.mockResolvedValue({
-      code: 200,
-      message: 'Success',
-      data: mockData,
-    });
-
-    const result = await fetchBahanBaku('11aa0000-0000-0000-0000-000000000000');
-
-    expect(result.code).toBe(200);
-    expect(result.message).toBe('Success');
-    expect(result.data).toEqual(mockData);
-  });
-});
+// Mock Axios Response
+export const mockAxiosResponse: AxiosResponse<ApiResponse<BahanBakuData[]>> = {
+  data: {
+    code: 200,
+    message: 'Success',
+    data: mockBahanBakuData,
+  },
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: {},
+} as AxiosResponse;
