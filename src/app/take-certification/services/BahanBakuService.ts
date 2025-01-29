@@ -1,7 +1,5 @@
 import { fetchBahanBaku } from './api';
 import { BahanBakuData } from '@/app/take-certification/models/types';
-import { ApiResponse } from '@/core/types/ApiResponse';
-import { AxiosResponse } from 'axios';
 
 export const getBahanBakuData = async (uuidTransaksi: string): Promise<BahanBakuData[]> => {
   try {

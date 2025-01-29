@@ -1,5 +1,4 @@
 import TakeCertificationPage from '@/app/take-certification/pages';
-import Image from 'next/image';
 
 export default function Home() {
   return (

@@ -1,3 +1,5 @@
+'use client';
+
 import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
 import { Screen } from '@/shared/components';
 
