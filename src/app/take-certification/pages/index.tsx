@@ -1,4 +1,5 @@
 import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
+import { Screen } from '@/shared/components';
 
 interface TakeCertificationProps {
   uuidTransaksi: string;
@@ -12,16 +13,7 @@ const TakeCertificationPage: React.FC<TakeCertificationProps> = ({
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  return (
-    <div>
-      <div>sidebar</div>
-      <div>
-        <div>header</div>
-        <div>sub-header</div>
-        <div>content</div>
-      </div>
-    </div>
-  );
+  return <Screen></Screen>;
 };
 
 export default TakeCertificationPage;

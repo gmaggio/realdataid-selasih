@@ -1,4 +1,6 @@
-const HeaderProfile = () => {
+import React from 'react';
+
+const HeaderProfile: React.FC = () => {
   return <div>HeaderProfile</div>;
 };
 

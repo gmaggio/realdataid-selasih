@@ -1,4 +1,6 @@
-const HeaderActions = () => {
+import React from 'react';
+
+const HeaderActions: React.FC = () => {
   return <div>HeaderActions</div>;
 };
 
