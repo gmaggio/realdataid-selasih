@@ -1,5 +1,4 @@
-import { fetchBahanBaku } from "@/app/take-certification/services/api";
-import { AxiosResponse } from 'axios';
+import { fetchBahanBaku } from "@/app/take-certification/services/BahanBakuService";
 
 jest.mock('../services/api', () => ({
   fetchBahanBaku: jest.fn(),
@@ -68,23 +67,15 @@ describe('API Tests', () => {
     const mockedFetchBahanBaku = fetchBahanBaku as jest.MockedFunction<typeof fetchBahanBaku>;
 
     mockedFetchBahanBaku.mockResolvedValue({
-      data: {
-        code: 200,
-        message: 'Success',
-        data: mockData,
-      },
-      status: 200,
-      statusText: 'OK',
-      headers: {},
-      config: {},
-    } as AxiosResponse);
+      code: 200,
+      message: 'Success',
+      data: mockData,
+    });
 
     const result = await fetchBahanBaku('11aa0000-0000-0000-0000-000000000000');
 
-    const data = result.data;
-
-    expect(data.code).toBe(200);
-    expect(data.message).toBe('Success');
-    expect(data.data).toEqual(mockData);
+    expect(result.code).toBe(200);
+    expect(result.message).toBe('Success');
+    expect(result.data).toEqual(mockData);
   });
 });

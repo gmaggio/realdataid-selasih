@@ -1,34 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { fetchBahanBaku } from '../services/api';
-import { BahanBakuData } from '@/app/take-certification/models/types';
+import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
 
-const TakeCertificationPage = () => {
-  const [data, setData] = useState<BahanBakuData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface TakeCertificationProps {
+  uuidTransaksi: string;
+}
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const response = await fetchBahanBaku(
-          '0cc32c66-4c6f-47bd-ab04-09aacc67f738'
-        );
-        setData(response.data.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadData();
-  }, []);
+const TakeCertificationPage: React.FC<TakeCertificationProps> = ({
+  uuidTransaksi,
+}) => {
+  const { data, isLoading, error } = useBahanBakuData(uuidTransaksi);
 
   if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
       <div>sidebar</div>
       <div>
         <div>header</div>
+        <div>sub-header</div>
         <div>content</div>
       </div>
     </div>
