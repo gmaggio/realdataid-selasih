@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import React, { HTMLAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 import { twMerge } from 'tailwind-merge';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const sidebarMenuItemVariants = tv({
   base: clsx(
@@ -25,7 +27,7 @@ const sidebarMenuItemVariants = tv({
       ),
       hilite: twMerge(
         buttonVariants.variants.type.primary,
-        clsx('hover:bg-btnSecondary', 'hover:opacity-50'),
+        clsx('hover:bg-btnPrimary', 'hover:opacity-50'),
       ),
     },
     disabled: {
@@ -73,34 +75,46 @@ type SidebarMenuItemVariants = VariantProps<typeof sidebarMenuItemVariants>;
 
 export interface SidebarMenuItemProps
   extends HTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+  label?: string;
+  children?: React.ReactNode;
+  href: string;
   variants?: SidebarMenuItemVariants;
   Icon: React.ComponentType;
   hideLabel?: boolean;
 }
 
 const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
+  label,
   children,
+  href,
   className,
   variants,
   Icon,
   hideLabel = false,
   ...rest
 }) => {
+  const pathname = usePathname();
+
+  const isActive = pathname === href;
+
   return (
-    <Button
-      Icon={Icon}
-      iconClass={sidebarMenuItemIconVariants({
-        disabled:
-          variants?.disabled === true &&
-          (variants?.type === undefined || variants?.type === 'primary'),
-      })}
-      className={twMerge(sidebarMenuItemVariants(variants), className)}
-      {...rest}
-      onClick={() => {}}
-    >
-      {!hideLabel && children}
-    </Button>
+    <Link href={href}>
+      <Button
+        Icon={Icon}
+        iconClass={sidebarMenuItemIconVariants({
+          disabled:
+            variants?.disabled === true &&
+            (variants?.type === undefined || variants?.type === 'primary'),
+        })}
+        className={twMerge(
+          sidebarMenuItemVariants({ ...variants, active: isActive }),
+          className,
+        )}
+        {...rest}
+      >
+        {!hideLabel && (children || label)}
+      </Button>
+    </Link>
   );
 };
 

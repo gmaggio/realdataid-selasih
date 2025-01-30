@@ -2,19 +2,34 @@ import React from 'react';
 import SidebarMenu from './components/SidebarMenu';
 import clsx from 'clsx';
 import Image from 'next/image';
+import SidebarMenuItem, {
+  SidebarMenuItemProps,
+} from '@/shared/components/Sidebar/components/SidebarMenuItem';
+import {
+  AcademicCapIcon,
+  ArrowLeftStartOnRectangleIcon,
+  ArrowRightStartOnRectangleIcon,
+  CheckBadgeIcon,
+  CreditCardIcon,
+  DocumentTextIcon,
+  HomeIcon,
+  QuestionMarkCircleIcon,
+  UserIcon,
+} from '@heroicons/react/24/outline';
 
 const Sidebar: React.FC = () => {
   return (
     <div
       className={clsx(
         'flex flex-col gap-4',
-        'w-[14.5rem] h-full',
+        'w-[14.5rem] h-auto',
         // 'bg-surfacePrimary',
         'bg-surfacePrimary/50', // TEST:
         'shadow-[4px_0px_10px_0px_rgba(0,_0,_0,_0.1)]',
       )}
     >
       <SidebarHeader />
+
       <div
         className={clsx(
           'flex flex-col gap-4',
@@ -23,11 +38,43 @@ const Sidebar: React.FC = () => {
           'bg-logo-green-accent/20', // TEST:
         )}
       >
-        <nav className={clsx('h-full')}>
-          <SidebarMenu />
+        <nav className={clsx('flex-1 h-full')}>
+          <SidebarMenu
+            items={[
+              <SidebarMenuItem
+                href=""
+                Icon={DocumentTextIcon}
+                variants={{ type: 'hilite' }}
+              >
+                Ajukan Sertifikasi
+              </SidebarMenuItem>,
+              <SidebarMenuItem href="" Icon={HomeIcon}>
+                Beranda
+              </SidebarMenuItem>,
+              <SidebarMenuItem href="" Icon={CreditCardIcon}>
+                Pembayaran
+              </SidebarMenuItem>,
+              <SidebarMenuItem href="/" Icon={CheckBadgeIcon}>
+                Proses Sertifikasi
+              </SidebarMenuItem>,
+              <SidebarMenuItem href="" Icon={QuestionMarkCircleIcon}>
+                Bantuan
+              </SidebarMenuItem>,
+            ]}
+          />
         </nav>
+
         <nav className={clsx('pt-4.5', 'border-t border-lineSecondary')}>
-          <SidebarMenu />
+          <SidebarMenu
+            items={[
+              <SidebarMenuItem href="" Icon={UserIcon}>
+                Pengaturan Profil
+              </SidebarMenuItem>,
+              <SidebarMenuItem href="" Icon={ArrowRightStartOnRectangleIcon}>
+                Keluar
+              </SidebarMenuItem>,
+            ]}
+          />
         </nav>
       </div>
     </div>

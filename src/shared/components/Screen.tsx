@@ -5,25 +5,12 @@ import clsx from 'clsx';
 
 const Screen: React.FC = () => {
   return (
-    <div className={clsx('flex flex-row', 'h-full')}>
+    <div className={clsx('flex flex-row', 'h-full min-h-screen')}>
       <Sidebar />
       <div>
         <div>header</div>
         <div>sub-header</div>
-        <div>
-          {/* TEST: */}
-          <Button
-            variants={{
-              type: 'outline',
-              size: 'lg',
-            }}
-            Icon={AcademicCapIcon}
-            iconElement={<BeakerIcon className="size-12" />}
-            onClick={() => {}}
-          >
-            Test
-          </Button>
-        </div>
+        <div></div>
       </div>
     </div>
   );

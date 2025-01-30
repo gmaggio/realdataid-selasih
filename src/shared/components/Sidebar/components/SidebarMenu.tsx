@@ -1,62 +1,23 @@
 import Button from '@/shared/components/Button';
-import SidebarMenuItem from '@/shared/components/Sidebar/components/SidebarMenuItem';
+import SidebarMenuItem, {
+  SidebarMenuItemProps,
+} from '@/shared/components/Sidebar/components/SidebarMenuItem';
 import {
   AcademicCapIcon,
   BeakerIcon,
   CakeIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 
-const SidebarMenu: React.FC = () => {
+export interface SidebarMenuProps extends HTMLAttributes<HTMLDivElement> {
+  items: React.ReactElement<typeof SidebarMenuItem>[];
+}
+
+const SidebarMenu: React.FC<SidebarMenuProps> = ({ items }) => {
   return (
     <div className={clsx('flex flex-col gap-3.5')}>
-      <SidebarMenuItem Icon={AcademicCapIcon} variants={{ type: 'hilite' }}>
-        Test 1a
-      </SidebarMenuItem>
-
-      <SidebarMenuItem
-        Icon={AcademicCapIcon}
-        variants={{ type: 'hilite', disabled: true }}
-      >
-        Test 1b
-      </SidebarMenuItem>
-
-      <SidebarMenuItem
-        Icon={AcademicCapIcon}
-        variants={{ type: 'hilite', active: true }}
-      >
-        Test 1c
-      </SidebarMenuItem>
-
-      <SidebarMenuItem Icon={BeakerIcon}>Test 2</SidebarMenuItem>
-
-      <SidebarMenuItem Icon={CakeIcon}>Test 3a</SidebarMenuItem>
-
-      <SidebarMenuItem Icon={CakeIcon} variants={{ disabled: true }}>
-        Test 3b
-      </SidebarMenuItem>
-
-      <SidebarMenuItem Icon={CakeIcon} variants={{ active: true }}>
-        Test 3c
-      </SidebarMenuItem>
-
-      <SidebarMenuItem Icon={CakeIcon} hideLabel>
-        Test ABC
-      </SidebarMenuItem>
-
-      {/* TEST: */}
-      <Button
-        variants={{
-          type: 'outline',
-          size: 'lg',
-        }}
-        Icon={AcademicCapIcon}
-        iconElement={<BeakerIcon className="size-12" />}
-        onClick={() => {}}
-      >
-        Test
-      </Button>
+      {items.map((item) => item)}
     </div>
   );
 };
