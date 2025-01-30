@@ -105,9 +105,9 @@
   --color-tableHeaderBg: var(--color-blue-100);
   --color-tableHeaderBorder: var(--color-blue-300);
 
-  --color-borderPrimary: var(--color-neutral-300);
-  --color-borderSecondary: var(--color-neutral-100);
-  --color-borderTertiary: var(--color-primary-500);
+  --color-linePrimary: var(--color-neutral-300);
+  --color-lineSecondary: var(--color-neutral-100);
+  --color-lineTertiary: var(--color-primary-500);
 
   --color-semanticImportant: var(--color-support-red);
 
@@ -116,6 +116,8 @@
   --font-body: var(--font-sans);
 
   /* Layouts */
+
+  --spacing-headerHeight: 10rem;
 
   --radius-button: var(--radius-lg);
   --radius-card: var(--radius-xl);
@@ -131,10 +133,29 @@
 }
 
 @layer base {
+  /* TEST: Tracing: delete when done - START ---> */
+  html::before {
+    content: '';
+    /* width: 1248px; */
+    /* height: 1051px; */
+    @apply w-screen h-screen;
+    background-image: url('/TEMPLATE/ProsesSertifikasi.png');
+    background-repeat: no-repeat;
+    background-position: left top;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0.5;
+    /* opacity: 0; */
+    z-index: -1000;
+    /* display: none; */
+  }
+  /* ---> TEST: END */
+
   body {
     @apply bg-surfaceBase;
-    @apply text-txtBody font-body;
-    @apply h-full rounded-button;
+    @apply text-base text-txtBody font-body;
+    @apply w-full h-screen;
   }
 }
 
