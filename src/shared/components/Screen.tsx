@@ -1,6 +1,7 @@
+import Button from '@/shared/components/Button';
 import Sidebar from '@/shared/components/Sidebar';
+import { AcademicCapIcon, BeakerIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import React from 'react';
 
 const Screen: React.FC = () => {
   return (
@@ -9,7 +10,20 @@ const Screen: React.FC = () => {
       <div>
         <div>header</div>
         <div>sub-header</div>
-        <div>content</div>
+        <div>
+          {/* TEST: */}
+          <Button
+            variants={{
+              type: 'outline',
+              size: 'lg',
+            }}
+            Icon={AcademicCapIcon}
+            iconElement={<BeakerIcon className="size-12" />}
+            onClick={() => {}}
+          >
+            Test
+          </Button>
+        </div>
       </div>
     </div>
   );

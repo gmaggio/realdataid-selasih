@@ -1,4 +1,5 @@
-export { default as Button } from './Button';
+export { buttonVariants, default as Button } from './Button';
+export type { ButtonProps } from './Button';
 export { default as CategoryTabs } from './CategoryTabs';
 export { default as Header } from './Header';
 export { default as Layer } from './Layer';
