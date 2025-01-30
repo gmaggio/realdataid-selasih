@@ -12,27 +12,27 @@
 
   /* Colors */
 
-  --color-logo-green-dark: oklch(0.36 0.07 152.81 / 1);
-  --color-logo-green: oklch(0.5 0.13 152.33 / 1);
-  --color-logo-green-light: oklch(0.66 0.16 140.03 / 1);
-  --color-logo-green-accent: oklch(0.83 0.18 118.27 / 1);
+  --color-logo-green-dark: #1c472b;
+  --color-logo-green: #00763b;
+  --color-logo-green-light: #57aa44;
+  --color-logo-green-accent: #bdd630;
 
-  --color-primary-500: oklch(0.65 0.11 190.08 / 1);
-  --color-primary-300: oklch(0.93 0.03 191.41 / 1);
-  --color-primary-100: oklch(0.98 0.01 180.72 / 1);
+  --color-primary-500: #17a39d;
+  --color-primary-300: #d1edeb;
+  --color-primary-100: #f0fdfa;
 
-  --color-neutral-900: oklch(0.32 0 0 / 1);
-  --color-neutral-700: oklch(0.41 0.01 243.07 / 1);
-  --color-neutral-500: oklch(0.63 0.01 244.37 / 1);
-  --color-neutral-300: oklch(0.77 0.01 248.02 / 1);
-  --color-neutral-100: oklch(0.94 0.01 247.88 / 1);
+  --color-neutral-900: #333333;
+  --color-neutral-700: #464c51;
+  --color-neutral-500: #818990;
+  --color-neutral-300: #adb5bd;
+  --color-neutral-100: #e9ecef;
 
-  --color-blue-900: oklch(0.44 0.06 249.2 / 1);
-  --color-blue-300: oklch(0.95 0.02 258.36 / 1);
-  --color-blue-100: oklch(0.98 0.01 236.62 / 1);
+  --color-blue-900: #39546f;
+  --color-blue-300: #e6f0ff;
+  --color-blue-100: #f0f9ff;
 
-  --color-base-white: oklch(1 0 0 / 1);
-  --color-support-red: oklch(0.59 0.2 21.63 / 1);
+  --color-base-white: #ffffff;
+  --color-support-red: #db3242;
 
   /* Typography */
 
@@ -136,9 +136,8 @@
   /* TEST: Tracing: delete when done - START ---> */
   html::before {
     content: '';
-    /* width: 1248px; */
-    /* height: 1051px; */
-    @apply w-screen h-screen;
+    width: 1248px;
+    height: 1051px;
     background-image: url('/TEMPLATE/ProsesSertifikasi.png');
     background-repeat: no-repeat;
     background-position: left top;
@@ -152,10 +151,14 @@
   }
   /* ---> TEST: END */
 
+  html {
+    @apply w-auto h-auto;
+  }
+
   body {
     @apply bg-surfaceBase;
     @apply text-base text-txtBody font-body;
-    @apply w-full h-screen;
+    @apply w-full h-full;
   }
 }
 

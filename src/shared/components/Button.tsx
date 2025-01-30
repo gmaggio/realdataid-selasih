@@ -39,6 +39,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   variants?: ButtonVariants;
   Icon?: React.ComponentType;
   iconElement?: React.ReactNode;
+  iconClass?: string | undefined;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -47,12 +48,13 @@ const Button: React.FC<ButtonProps> = ({
   variants,
   Icon,
   iconElement,
+  iconClass,
   ...rest
 }) => {
   return (
     <button className={twMerge(buttonVariants(variants), className)} {...rest}>
       {Icon && (
-        <div className="size-4.5">
+        <div className={twMerge('size-4.5', iconClass)}>
           <Icon />
         </div>
       )}

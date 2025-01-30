@@ -12,10 +12,38 @@ const SidebarMenu: React.FC = () => {
   return (
     <div className={clsx('flex flex-col gap-3.5')}>
       <SidebarMenuItem Icon={AcademicCapIcon} variants={{ type: 'hilite' }}>
-        Test 1
+        Test 1a
       </SidebarMenuItem>
+
+      <SidebarMenuItem
+        Icon={AcademicCapIcon}
+        variants={{ type: 'hilite', disabled: true }}
+      >
+        Test 1b
+      </SidebarMenuItem>
+
+      <SidebarMenuItem
+        Icon={AcademicCapIcon}
+        variants={{ type: 'hilite', active: true }}
+      >
+        Test 1c
+      </SidebarMenuItem>
+
       <SidebarMenuItem Icon={BeakerIcon}>Test 2</SidebarMenuItem>
-      <SidebarMenuItem Icon={CakeIcon}>Test 3</SidebarMenuItem>
+
+      <SidebarMenuItem Icon={CakeIcon}>Test 3a</SidebarMenuItem>
+
+      <SidebarMenuItem Icon={CakeIcon} variants={{ disabled: true }}>
+        Test 3b
+      </SidebarMenuItem>
+
+      <SidebarMenuItem Icon={CakeIcon} variants={{ active: true }}>
+        Test 3c
+      </SidebarMenuItem>
+
+      <SidebarMenuItem Icon={CakeIcon} hideLabel>
+        Test ABC
+      </SidebarMenuItem>
 
       {/* TEST: */}
       <Button
