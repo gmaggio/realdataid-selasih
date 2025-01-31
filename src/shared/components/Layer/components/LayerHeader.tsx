@@ -11,7 +11,7 @@ const LayerHeader: React.FC<LayerHeaderProps> = ({ title }) => {
       className={clsx(
         'flex flex-row items-center',
         'text-2xl text-txtHeading font-bold',
-        'px-5.5! py-4',
+        'px-5.5! py-3',
         'border-b border-lineSecondary',
       )}
     >

@@ -20,7 +20,7 @@ const TabItem: React.FC<TabItemProps> = ({ label, href, ...rest }) => {
         className={twMerge(
           clsx(
             'text-lg text-txtBody font-semibold',
-            'pt-3.5 pb-3',
+            'py-3',
             'relative',
             'hover:text-txtHilite',
           ),

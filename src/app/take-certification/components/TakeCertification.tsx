@@ -1,4 +1,4 @@
-import { CategoryTabs, Layer, Tabs } from '@/shared/components';
+import { CategoryTabs, Layer, Table, Tabs } from '@/shared/components';
 import LayerHeader from '@/shared/components/Layer/components/LayerHeader';
 import clsx from 'clsx';
 import React from 'react';
@@ -28,6 +28,11 @@ const TakeCertificationContent: React.FC = () => {
           { label: 'Emisi Gas Rumah Kaca', href: '' },
         ]}
       />
+
+      <div className={clsx('flex- flex-col gap-3')}>
+        <Table />
+        <Table />
+      </div>
 
       <div className={clsx('py-5')}>TEST</div>
     </Layer>

@@ -19,7 +19,11 @@ const HeaderProfile: React.FC = () => {
 const HeaderAvatar: React.FC = () => {
   return (
     <div
-      className={clsx('w-9 h-9 p-1', 'border border-linePrimary rounded-full')}
+      className={clsx(
+        'flex items-center justify-center',
+        'w-9 h-9 p-1',
+        'border border-linePrimary rounded-full',
+      )}
     >
       <Image
         priority
