@@ -30,7 +30,7 @@ const TabItem: React.FC<TabItemProps> = ({ label, href, ...rest }) => {
               'before:content-[""]',
               'before:absolute',
               'before:left-0 before:right-0 before:bottom-0',
-              'before:h-[.1875rem] before:bg-btnPrimary',
+              'before:h-[.1875rem] before:bg-lineTertiary',
             ),
         )}
         {...rest}
