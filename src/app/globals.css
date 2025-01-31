@@ -134,6 +134,10 @@
 
 @layer base {
   /* TEST: Tracing: delete when done - START ---> */
+  html {
+    min-width: 1248px;
+    min-height: 1051px;
+  }
   html::before {
     content: '';
     width: 1248px;

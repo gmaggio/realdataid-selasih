@@ -1,10 +1,10 @@
-import { Button, buttonVariants } from '@/shared/components';
 import clsx from 'clsx';
-import React, { HTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 import { twMerge } from 'tailwind-merge';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Button, { buttonVariants } from '@/shared/components/Button';
 
 const sidebarMenuItemVariants = tv({
   base: clsx(
@@ -74,7 +74,7 @@ const sidebarMenuItemIconVariants = tv({
 type SidebarMenuItemVariants = VariantProps<typeof sidebarMenuItemVariants>;
 
 export interface SidebarMenuItemProps
-  extends HTMLAttributes<HTMLButtonElement> {
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
   children?: React.ReactNode;
   href: string;
@@ -100,6 +100,8 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   return (
     <Link href={href}>
       <Button
+        disabled={variants?.disabled === true}
+        style={{ width: '100%' }}
         Icon={Icon}
         iconClass={sidebarMenuItemIconVariants({
           disabled:

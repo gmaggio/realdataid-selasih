@@ -1,13 +1,5 @@
-import React from 'react';
-import SidebarMenu from './components/SidebarMenu';
-import clsx from 'clsx';
-import Image from 'next/image';
-import SidebarMenuItem, {
-  SidebarMenuItemProps,
-} from '@/shared/components/Sidebar/components/SidebarMenuItem';
+import SidebarMenuItem from '@/shared/components/Sidebar/components/SidebarMenuItem';
 import {
-  AcademicCapIcon,
-  ArrowLeftStartOnRectangleIcon,
   ArrowRightStartOnRectangleIcon,
   CheckBadgeIcon,
   CreditCardIcon,
@@ -16,12 +8,16 @@ import {
   QuestionMarkCircleIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
+import Image from 'next/image';
+import React from 'react';
+import SidebarMenu from './components/SidebarMenu';
 
 const Sidebar: React.FC = () => {
   return (
     <div
       className={clsx(
-        'flex flex-col gap-4',
+        'flex flex-col gap-4 shrink-0',
         'w-[14.5rem] h-auto',
         // 'bg-surfacePrimary',
         'bg-surfacePrimary/50', // TEST:
@@ -31,33 +27,37 @@ const Sidebar: React.FC = () => {
       <SidebarHeader />
 
       <div
-        className={clsx(
-          'flex flex-col gap-4',
-          'w-full h-full',
-          'px-3.5 pb-4',
-          'bg-logo-green-accent/20', // TEST:
-        )}
+        className={clsx('flex flex-col gap-4', 'w-full h-full', 'px-3.5 pb-4')}
       >
         <nav className={clsx('flex-1 h-full')}>
           <SidebarMenu
             items={[
               <SidebarMenuItem
+                key="ajukan-sertifikasi"
                 href=""
                 Icon={DocumentTextIcon}
                 variants={{ type: 'hilite' }}
               >
                 Ajukan Sertifikasi
               </SidebarMenuItem>,
-              <SidebarMenuItem href="" Icon={HomeIcon}>
+              <SidebarMenuItem key="beranda" href="" Icon={HomeIcon}>
                 Beranda
               </SidebarMenuItem>,
-              <SidebarMenuItem href="" Icon={CreditCardIcon}>
+              <SidebarMenuItem key="pembayaran" href="" Icon={CreditCardIcon}>
                 Pembayaran
               </SidebarMenuItem>,
-              <SidebarMenuItem href="/" Icon={CheckBadgeIcon}>
+              <SidebarMenuItem
+                key="proses-sertifikasi"
+                href="/"
+                Icon={CheckBadgeIcon}
+              >
                 Proses Sertifikasi
               </SidebarMenuItem>,
-              <SidebarMenuItem href="" Icon={QuestionMarkCircleIcon}>
+              <SidebarMenuItem
+                key="bantuan"
+                href=""
+                Icon={QuestionMarkCircleIcon}
+              >
                 Bantuan
               </SidebarMenuItem>,
             ]}
@@ -67,10 +67,14 @@ const Sidebar: React.FC = () => {
         <nav className={clsx('pt-4.5', 'border-t border-lineSecondary')}>
           <SidebarMenu
             items={[
-              <SidebarMenuItem href="" Icon={UserIcon}>
+              <SidebarMenuItem key="pengaturan-profil" href="" Icon={UserIcon}>
                 Pengaturan Profil
               </SidebarMenuItem>,
-              <SidebarMenuItem href="" Icon={ArrowRightStartOnRectangleIcon}>
+              <SidebarMenuItem
+                key="keluar"
+                href=""
+                Icon={ArrowRightStartOnRectangleIcon}
+              >
                 Keluar
               </SidebarMenuItem>,
             ]}

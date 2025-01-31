@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { HTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { tv, type VariantProps } from 'tailwind-variants';
 
@@ -34,31 +34,36 @@ export const buttonVariants = tv({
 
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   variants?: ButtonVariants;
-  Icon?: React.ComponentType;
-  iconElement?: React.ReactNode;
-  iconClass?: string | undefined;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  children,
-  className,
-  variants,
-  Icon,
-  iconElement,
-  iconClass,
-  ...rest
-}) => {
+interface ButtonWithIconProps extends ButtonBaseProps {
+  Icon?: React.ComponentType;
+  iconClass?: string | undefined;
+  iconElement?: never;
+}
+
+interface ButtonWithIconElementProps extends ButtonBaseProps {
+  Icon?: never;
+  iconClass?: never;
+  iconElement?: React.ReactNode;
+}
+
+export type ButtonProps = ButtonWithIconProps | ButtonWithIconElementProps;
+
+const Button: React.FC<ButtonProps> = (props) => {
+  const { children, className, variants, ...rest } = props;
+
   return (
     <button className={twMerge(buttonVariants(variants), className)} {...rest}>
-      {Icon && (
-        <div className={twMerge('size-4.5', iconClass)}>
-          <Icon />
+      {'Icon' in props && props.Icon && (
+        <div className={twMerge('size-4.5', props.iconClass)}>
+          <props.Icon />
         </div>
       )}
-      {!Icon && iconElement}
+      {!('Icon' in props) && 'iconElement' in props && props.iconElement}
       {children}
     </button>
   );

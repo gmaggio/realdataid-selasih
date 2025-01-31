@@ -2,6 +2,7 @@
 
 import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
 import { Screen } from '@/shared/components';
+import clsx from 'clsx';
 
 interface TakeCertificationProps {
   uuidTransaksi: string;
@@ -12,8 +13,23 @@ const TakeCertificationPage: React.FC<TakeCertificationProps> = ({
 }) => {
   const { data, isLoading, error } = useBahanBakuData(uuidTransaksi);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (isLoading)
+    return (
+      <div
+        className={clsx('flex items-center justify-center', 'w-full h-screnn')}
+      >
+        Loading...
+      </div>
+    );
+
+  if (error)
+    return (
+      <div
+        className={clsx('flex items-center justify-center', 'w-full h-screnn')}
+      >
+        Error: {error}
+      </div>
+    );
 
   return <Screen />;
 };

@@ -2,6 +2,8 @@ export { buttonVariants, default as Button } from './Button';
 export type { ButtonProps } from './Button';
 export { default as CategoryTabs } from './CategoryTabs';
 export { default as Header } from './Header';
+export { IconButtonVariants, default as IconButton } from './IconButton';
+export type { IconButtonProps } from './IconButton';
 export { default as Layer } from './Layer';
 export { default as Screen } from './Screen';
 export { default as Sidebar } from './Sidebar';
