@@ -1,17 +1,25 @@
 import Header from '@/shared/components/Header';
 import Sidebar from '@/shared/components/Sidebar';
-import SubHeader from '@/shared/components/SubHeader';
-import { AcademicCapIcon, BeakerIcon } from '@heroicons/react/24/outline';
+import SubHeader, { SubHeaderProps } from '@/shared/components/SubHeader';
 import clsx from 'clsx';
+import { HTMLAttributes } from 'react';
 
-const Screen: React.FC = () => {
+export interface ScreenProps extends HTMLAttributes<HTMLDivElement> {
+  subheader: SubHeaderProps;
+}
+
+const Screen: React.FC<ScreenProps> = ({ subheader, children }) => {
   return (
     <div className={clsx('flex flex-row', 'h-full min-h-screen')}>
       <Sidebar />
       <div className={clsx('w-full')}>
         <Header />
-        <SubHeader />
-        <div></div>
+        <SubHeader
+          Icon={subheader.Icon}
+          heading={subheader.heading}
+          title={subheader.title}
+        />
+        <div className={clsx('flex flex-col gap-7.5', 'p-7.5')}>{children}</div>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { ButtonHTMLAttributes, HTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { tv, type VariantProps } from 'tailwind-variants';
 
@@ -35,7 +35,6 @@ export const buttonVariants = tv({
 type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
   variants?: ButtonVariants;
 }
 

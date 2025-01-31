@@ -1,7 +1,9 @@
 'use client';
 
+import TakeCertificationContent from '@/app/take-certification/components/TakeCertification';
 import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
-import { Screen } from '@/shared/components';
+import { Layer, Screen } from '@/shared/components';
+import { CheckBadgeIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 
 interface TakeCertificationProps {
@@ -31,7 +33,17 @@ const TakeCertificationPage: React.FC<TakeCertificationProps> = ({
       </div>
     );
 
-  return <Screen />;
+  return (
+    <Screen
+      subheader={{
+        Icon: CheckBadgeIcon,
+        heading: 'Sertifikasi Awal',
+        title: '46335.01:2024 • Industri Air Mineral',
+      }}
+    >
+      <TakeCertificationContent />
+    </Screen>
+  );
 };
 
 export default TakeCertificationPage;
