@@ -1,5 +1,6 @@
 import Header from '@/shared/components/Header';
 import Sidebar from '@/shared/components/Sidebar';
+import SubHeader from '@/shared/components/SubHeader';
 import { AcademicCapIcon, BeakerIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 
@@ -9,7 +10,7 @@ const Screen: React.FC = () => {
       <Sidebar />
       <div className={clsx('w-full')}>
         <Header />
-        <div>sub-header</div>
+        <SubHeader />
         <div></div>
       </div>
     </div>

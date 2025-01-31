@@ -18,7 +18,7 @@ const Sidebar: React.FC = () => {
     <div
       className={clsx(
         'flex flex-col gap-4 shrink-0',
-        'w-[14.5rem] h-auto',
+        'w-[14.5rem] h-auto z-100',
         // 'bg-surfacePrimary',
         'bg-surfacePrimary/50', // TEST:
         'shadow-[4px_0px_10px_0px_rgba(0,_0,_0,_0.1)]',

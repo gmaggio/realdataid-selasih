@@ -7,7 +7,12 @@ import Image from 'next/image';
 const Header: React.FC = () => {
   return (
     <div
-      className={clsx('flex flex-row items-center', 'w-full h-[4.5rem] px-7.5')}
+      className={clsx(
+        'flex flex-row items-center',
+        'w-full h-[4.5rem] px-7.5',
+        'bg-surfacePrimary',
+        'border-b border-lineSecondary',
+      )}
     >
       <HeaderLogo />
       <HeaderActions />
