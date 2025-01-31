@@ -1,10 +1,6 @@
-export interface BahanBakuAddition {
-  kode_file: string;
-  nama: string;
-}
-
-export interface BahanBakuData {
+export interface BahanBakuMainData {
   kode: string;
+  kode_transaksi_id: string;
   kode_lini_produksi: string;
   lini_produksi: string;
   nama: string;
@@ -12,6 +8,10 @@ export interface BahanBakuData {
   satuan: string;
   jenis_bahan_baku: string;
   asal_bahan_baku: string;
+  total_penggunaan: string;
+}
+
+export interface BahanBakuData extends BahanBakuMainData {
   addition: BahanBakuAddition[];
   bulan_1: string;
   bulan_2: string;
@@ -25,7 +25,10 @@ export interface BahanBakuData {
   bulan_10: string;
   bulan_11: string;
   bulan_12: string;
-  total_penggunaan: string;
-  kode_transaksi_id: string;
   uuid_user: string;
+}
+
+export interface BahanBakuAddition {
+  kode_file: string;
+  nama: string;
 }

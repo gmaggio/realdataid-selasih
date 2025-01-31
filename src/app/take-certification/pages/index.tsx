@@ -1,6 +1,6 @@
 'use client';
 
-import TakeCertificationContent from '@/app/take-certification/components/TakeCertification';
+import TakeCertificationContent from '@/app/take-certification/components/TakeCertificationContent';
 import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
 import { Layer, Screen } from '@/shared/components';
 import { CheckBadgeIcon } from '@heroicons/react/24/outline';
@@ -13,7 +13,7 @@ interface TakeCertificationProps {
 const TakeCertificationPage: React.FC<TakeCertificationProps> = ({
   uuidTransaksi,
 }) => {
-  const { data, isLoading, error } = useBahanBakuData(uuidTransaksi);
+  /* const { data, isLoading, error } = useBahanBakuData(uuidTransaksi);
 
   if (isLoading)
     return (
@@ -31,7 +31,7 @@ const TakeCertificationPage: React.FC<TakeCertificationProps> = ({
       >
         Error: {error}
       </div>
-    );
+    ); */
 
   return (
     <Screen

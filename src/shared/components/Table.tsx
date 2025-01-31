@@ -1,69 +1,221 @@
+import { BahanBakuMainData } from '@/app/take-certification/models/types';
 import Button from '@/shared/components/Button';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import IconButton from '@/shared/components/IconButton';
+import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { HTMLAttributes } from 'react';
 
-export interface TableProps extends HTMLAttributes<HTMLDivElement> {}
+export interface TableProps {
+  header?: TableHeaderProps;
+}
 
-const Table: React.FC<TableProps> = ({}) => {
+const Table: React.FC<TableProps> = ({ header }) => {
+  const columns = [
+    {
+      header: 'Lini Bisins',
+      accessor: 'lini_produksi',
+    },
+    {
+      header: 'Nama Bahan Baku',
+      accessor: 'nama',
+    },
+    {
+      header: 'Tipe Bahan Baku',
+      accessor: 'tipe_bahan_baku',
+    },
+    {
+      header: 'Jenis Bahan Baku',
+      accessor: 'jenis_bahan_baku',
+    },
+    {
+      header: 'Asal Bahan Baku',
+      accessor: 'asal_bahan_baku',
+    },
+    {
+      header: 'Total Penggunaan',
+      accessor: 'total_penggunaan',
+    },
+    {
+      header: '',
+      accessor: 'actions',
+    },
+  ];
+
+  const data: BahanBakuMainData[] = [
+    {
+      kode: '',
+      kode_transaksi_id: '',
+      kode_lini_produksi: '',
+      lini_produksi: 'Pupuk Perkebunan',
+      nama: 'Amonia',
+      tipe_bahan_baku: 'Amonia 10%',
+      jenis_bahan_baku: 'Daur Ulang',
+      asal_bahan_baku: 'Impor',
+      total_penggunaan: '50.489',
+      satuan: 'Ton',
+    },
+    {
+      kode: '',
+      kode_transaksi_id: '',
+      kode_lini_produksi: '',
+      lini_produksi: 'Pupuk Perkebunan',
+      nama: 'Amonia',
+      tipe_bahan_baku: 'Amonia 10%',
+      jenis_bahan_baku: 'Daur Ulang',
+      asal_bahan_baku: 'Impor',
+      total_penggunaan: '50.489',
+      satuan: 'Ton',
+    },
+    {
+      kode: '',
+      kode_transaksi_id: '',
+      kode_lini_produksi: '',
+      lini_produksi: 'Pupuk Perkebunan',
+      nama: 'Amonia',
+      tipe_bahan_baku: 'Amonia 10%',
+      jenis_bahan_baku: 'Daur Ulang',
+      asal_bahan_baku: 'Impor',
+      total_penggunaan: '50.489',
+      satuan: 'Ton',
+    },
+    {
+      kode: '',
+      kode_transaksi_id: '',
+      kode_lini_produksi: '',
+      lini_produksi: 'Pupuk Perkebunan',
+      nama: 'Amonia',
+      tipe_bahan_baku: 'Amonia 10%',
+      jenis_bahan_baku: 'Daur Ulang',
+      asal_bahan_baku: 'Impor',
+      total_penggunaan: '50.489',
+      satuan: 'Ton',
+    },
+    {
+      kode: '',
+      kode_transaksi_id: '',
+      kode_lini_produksi: '',
+      lini_produksi: 'Pupuk Perkebunan',
+      nama: 'Amonia',
+      tipe_bahan_baku: 'Amonia 10%',
+      jenis_bahan_baku: 'Daur Ulang',
+      asal_bahan_baku: 'Impor',
+      total_penggunaan: '50.489',
+      satuan: 'Ton',
+    },
+  ];
+
   return (
-    <div className={clsx('flex flex-col gap-3', 'w-full pt-2.5 pb-5')}>
-      <TableHeader />
+    <div className={clsx('flex flex-col gap-4.5', 'w-full pt-2.5 pb-5')}>
+      {header && <TableHeader {...header} />}
 
-      <table className={clsx('table-auto')}>
+      <table
+        className={clsx(
+          'table-auto',
+          'border border-tableBorder rounded-md',
+          'border-separate border-spacing-0',
+          'overflow-clip',
+
+          // All Cells
+          '[&_:is(th,td)]:px-3 [&_:is(th,td)]:py-2',
+
+          // Last Column Cells
+          '[&_:is(th,td)]:last:px-1.5 [&_:is(th,td)]:last:py-0',
+          '[&_:is(th,td)]:last:w-min',
+
+          // Header Cells
+          '[&_th]:text-left',
+          '[&_th]:text-tableHeading',
+          '[&_th]:bg-tableHeaderBg',
+          '[&_th]:border [&_th]:border-tableHeaderBorder',
+
+          // Data Cells
+          '[&_td]:bg-surfacePrimary',
+          '[&_td]:border [&_td]:border-tableBorder',
+        )}
+      >
         <thead>
           <tr>
-            <th>Song</th>
-            <th>Artist</th>
-            <th>Year</th>
+            {columns.map((column) => (
+              <th key={column.accessor}>{column.header}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-            <td>Malcolm Lockyer</td>
-            <td>1961</td>
-          </tr>
-          <tr>
-            <td>Witchy Woman</td>
-            <td>The Eagles</td>
-            <td>1972</td>
-          </tr>
-          <tr>
-            <td>Shining Star</td>
-            <td>Earth, Wind, and Fire</td>
-            <td>1975</td>
-          </tr>
+          {data.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {columns.map((column) => {
+                if (column.accessor === 'total_penggunaan') {
+                  return (
+                    <td key={column.accessor}>
+                      <div className={clsx('flex gap-3 justify-between')}>
+                        <span>{row[column.accessor]}</span>
+                        <span className={clsx('font-bold')}>{row.satuan}</span>
+                      </div>
+                    </td>
+                  );
+                }
+
+                if (column.accessor === 'actions') {
+                  return (
+                    <td key={column.accessor}>
+                      <div className={clsx('flex justify-center gap-2')}>
+                        <IconButton Icon={TrashIcon} />
+                        <IconButton Icon={PencilIcon} />
+                      </div>
+                    </td>
+                  );
+                }
+
+                return (
+                  <td key={column.accessor}>{(row as any)[column.accessor]}</td>
+                );
+              })}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
   );
 };
 
-export interface TableHeaderProps extends HTMLAttributes<HTMLDivElement> {}
+export interface TableHeaderProps {
+  title?: string;
+  description?: string;
+  onAdd?: () => void;
+  required?: boolean;
+}
 
-const TableHeader: React.FC<TableHeaderProps> = ({}) => {
+const TableHeader: React.FC<TableHeaderProps> = ({
+  title,
+  description,
+  onAdd,
+  required,
+}) => {
   return (
     <div className={clsx('flex flex-row', 'w-full')}>
       <div className={clsx('flex flex-col flex-1')}>
-        <div className={clsx('text-lg text-tableHeading font-bold')}>
-          Bahan baku utama
-          <span className={clsx('text-semanticImportant')}>*</span>
-        </div>
-        <div>
-          Semua bahan baku utama yang diperlukan agar produk dapat diproduksi
-          (Periode 12 bulan terakhir).
-        </div>
+        {title && (
+          <div className={clsx('text-lg text-tableHeading font-bold')}>
+            {title}
+            {required && (
+              <span className={clsx('text-semanticImportant')}>*</span>
+            )}
+          </div>
+        )}
+        {description && <div>{description}</div>}
       </div>
-      <Button
-        variants={{
-          type: 'support',
-          size: 'sm',
-        }}
-        Icon={PlusIcon}
-      >
-        Tambah Data
-      </Button>
+      {onAdd && (
+        <Button
+          variants={{
+            type: 'support',
+            size: 'sm',
+          }}
+          Icon={PlusIcon}
+          onClick={onAdd}
+        >
+          Tambah Data
+        </Button>
+      )}
     </div>
   );
 };

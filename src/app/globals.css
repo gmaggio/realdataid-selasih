@@ -101,13 +101,14 @@
   --color-surfacePrimary: var(--color-base-white);
   --color-surfaceSecondary: var(--color-primary-300);
 
-  --color-tableHeading: var(--color-blue-900);
-  --color-tableHeaderBg: var(--color-blue-100);
-  --color-tableHeaderBorder: var(--color-blue-300);
-
   --color-linePrimary: var(--color-neutral-300);
   --color-lineSecondary: var(--color-neutral-100);
   --color-lineTertiary: var(--color-primary-500);
+
+  --color-tableHeading: var(--color-blue-900);
+  --color-tableHeaderBg: var(--color-blue-100);
+  --color-tableHeaderBorder: var(--color-blue-300);
+  --color-tableBorder: var(--color-lineSecondary);
 
   --color-semanticImportant: var(--color-support-red);
 

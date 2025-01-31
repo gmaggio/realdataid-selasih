@@ -30,8 +30,25 @@ const TakeCertificationContent: React.FC = () => {
       />
 
       <div className={clsx('flex- flex-col gap-3')}>
-        <Table />
-        <Table />
+        <Table
+          header={{
+            title: 'Bahan baku utama',
+            description:
+              'Semua bahan baku utama yang diperlukan agar produk dapat diproduksi (Periode 12 bulan terakhir).',
+            onAdd: () => {},
+            required: true,
+          }}
+        />
+
+        <Table
+          header={{
+            title: 'Bahan baku utama',
+            description:
+              'Semua bahan baku utama yang diperlukan agar produk dapat diproduksi (Periode 12 bulan terakhir).',
+            onAdd: () => {},
+            required: true,
+          }}
+        />
       </div>
 
       <div className={clsx('py-5')}>TEST</div>
