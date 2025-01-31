@@ -29,8 +29,7 @@ const HeaderLogo: React.FC = () => {
       alt="Kemenperin"
       width={600}
       height={178}
-      objectFit={'contain'}
-      className={clsx('w-[134] h-[40]')}
+      className={clsx('w-[134] h-[40]', 'object-contain')}
     />
   );
 };

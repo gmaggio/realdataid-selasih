@@ -6,6 +6,8 @@ export { IconButtonVariants, default as IconButton } from './IconButton';
 export type { IconButtonProps } from './IconButton';
 export { default as Layer } from './Layer';
 export type { LayerProps } from './Layer';
+export { default as Modal } from './Modal';
+export type { ModalProps } from './Modal';
 export { default as Screen } from './Screen';
 export type { ScreenProps } from './Screen';
 export { default as Sidebar } from './Sidebar';

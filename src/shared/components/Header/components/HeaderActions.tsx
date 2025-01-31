@@ -6,8 +6,8 @@ import React from 'react';
 const HeaderActions: React.FC = () => {
   return (
     <div className={clsx('flex flex-row flex-1 justify-end', 'gap-4.5 px-4.5')}>
-      <IconButton Icon={MagnifyingGlassIcon} />
-      <IconButton Icon={BellIcon} />
+      <IconButton icon={MagnifyingGlassIcon} />
+      <IconButton icon={BellIcon} />
     </div>
   );
 };

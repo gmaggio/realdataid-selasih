@@ -35,28 +35,28 @@ const Sidebar: React.FC = () => {
               <SidebarMenuItem
                 key="ajukan-sertifikasi"
                 href=""
-                Icon={DocumentTextIcon}
+                icon={DocumentTextIcon}
                 variants={{ type: 'hilite' }}
               >
                 Ajukan Sertifikasi
               </SidebarMenuItem>,
-              <SidebarMenuItem key="beranda" href="" Icon={HomeIcon}>
+              <SidebarMenuItem key="beranda" href="" icon={HomeIcon}>
                 Beranda
               </SidebarMenuItem>,
-              <SidebarMenuItem key="pembayaran" href="" Icon={CreditCardIcon}>
+              <SidebarMenuItem key="pembayaran" href="" icon={CreditCardIcon}>
                 Pembayaran
               </SidebarMenuItem>,
               <SidebarMenuItem
                 key="proses-sertifikasi"
                 href="/"
-                Icon={CheckBadgeIcon}
+                icon={CheckBadgeIcon}
               >
                 Proses Sertifikasi
               </SidebarMenuItem>,
               <SidebarMenuItem
                 key="bantuan"
                 href=""
-                Icon={QuestionMarkCircleIcon}
+                icon={QuestionMarkCircleIcon}
               >
                 Bantuan
               </SidebarMenuItem>,
@@ -67,13 +67,13 @@ const Sidebar: React.FC = () => {
         <nav className={clsx('pt-4.5', 'border-t border-lineSecondary')}>
           <SidebarMenu
             items={[
-              <SidebarMenuItem key="pengaturan-profil" href="" Icon={UserIcon}>
+              <SidebarMenuItem key="pengaturan-profil" href="" icon={UserIcon}>
                 Pengaturan Profil
               </SidebarMenuItem>,
               <SidebarMenuItem
                 key="keluar"
                 href=""
-                Icon={ArrowRightStartOnRectangleIcon}
+                icon={ArrowRightStartOnRectangleIcon}
               >
                 Keluar
               </SidebarMenuItem>,

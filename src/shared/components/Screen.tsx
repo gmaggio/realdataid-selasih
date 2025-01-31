@@ -15,7 +15,7 @@ const Screen: React.FC<ScreenProps> = ({ subheader, children }) => {
       <div className={clsx('w-full')}>
         <Header />
         <SubHeader
-          Icon={subheader.Icon}
+          icon={subheader.icon}
           heading={subheader.heading}
           title={subheader.title}
         />

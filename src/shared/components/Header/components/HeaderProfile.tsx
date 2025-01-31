@@ -31,7 +31,7 @@ const HeaderAvatar: React.FC = () => {
         alt="Kemenperin"
         width={59}
         height={53}
-        objectFit={'contain'}
+        className={clsx('object-contain')}
       />
     </div>
   );

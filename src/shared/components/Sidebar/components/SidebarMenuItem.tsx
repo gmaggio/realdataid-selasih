@@ -79,7 +79,7 @@ export interface SidebarMenuItemProps
   children?: React.ReactNode;
   href: string;
   variants?: SidebarMenuItemVariants;
-  Icon: React.ComponentType;
+  icon: React.ComponentType;
   hideLabel?: boolean;
 }
 
@@ -89,7 +89,7 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   href,
   className,
   variants,
-  Icon,
+  icon,
   hideLabel = false,
   ...rest
 }) => {
@@ -102,7 +102,7 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
       <Button
         disabled={variants?.disabled === true}
         style={{ width: '100%' }}
-        Icon={Icon}
+        icon={icon}
         iconClass={sidebarMenuItemIconVariants({
           disabled:
             variants?.disabled === true &&

@@ -2,12 +2,12 @@ import clsx from 'clsx';
 import React from 'react';
 
 export interface SubHeaderProps {
-  Icon: React.ComponentType;
+  icon: React.ComponentType;
   heading: string;
   title: string;
 }
 
-const SubHeader: React.FC<SubHeaderProps> = ({ Icon, heading, title }) => {
+const SubHeader: React.FC<SubHeaderProps> = ({ icon, heading, title }) => {
   return (
     <div
       className={clsx(
@@ -24,7 +24,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ Icon, heading, title }) => {
           'text-txtHilite bg-surfaceSecondary',
         )}
       >
-        <Icon />
+        <icon />
       </div>
       <div className={clsx('flex-flex-col gap-2')}>
         <div className={clsx('text-sm text-txtBody2')}>{heading}</div>

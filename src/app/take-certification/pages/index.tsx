@@ -36,7 +36,7 @@ const TakeCertificationPage: React.FC<TakeCertificationProps> = ({
   return (
     <Screen
       subheader={{
-        Icon: CheckBadgeIcon,
+        icon: CheckBadgeIcon,
         heading: 'Sertifikasi Awal',
         title: '46335.01:2024 • Industri Air Mineral',
       }}

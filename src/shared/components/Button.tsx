@@ -39,13 +39,13 @@ interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 interface ButtonWithIconProps extends ButtonBaseProps {
-  Icon?: React.ComponentType;
+  icon?: React.ComponentType;
   iconClass?: string | undefined;
   iconElement?: never;
 }
 
 interface ButtonWithIconElementProps extends ButtonBaseProps {
-  Icon?: never;
+  icon?: never;
   iconClass?: never;
   iconElement?: React.ReactNode;
 }
@@ -53,16 +53,16 @@ interface ButtonWithIconElementProps extends ButtonBaseProps {
 export type ButtonProps = ButtonWithIconProps | ButtonWithIconElementProps;
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { children, className, variants, ...rest } = props;
+  const { children, className, variants, iconClass, ...rest } = props;
 
   return (
     <button className={twMerge(buttonVariants(variants), className)} {...rest}>
-      {'Icon' in props && props.Icon && (
+      {'icon' in props && props.icon && (
         <div className={twMerge('size-4.5', props.iconClass)}>
-          <props.Icon />
+          <props.icon />
         </div>
       )}
-      {!('Icon' in props) && 'iconElement' in props && props.iconElement}
+      {!('icon' in props) && 'iconElement' in props && props.iconElement}
       {children}
     </button>
   );

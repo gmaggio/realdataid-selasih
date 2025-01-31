@@ -160,8 +160,8 @@ const Table: React.FC<TableProps> = ({ header }) => {
                   return (
                     <td key={column.accessor}>
                       <div className={clsx('flex justify-center gap-2')}>
-                        <IconButton Icon={TrashIcon} />
-                        <IconButton Icon={PencilIcon} />
+                        <IconButton icon={TrashIcon} />
+                        <IconButton icon={PencilIcon} />
                       </div>
                     </td>
                   );
@@ -211,7 +211,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
             type: 'support',
             size: 'sm',
           }}
-          Icon={PlusIcon}
+          icon={PlusIcon}
           onClick={onAdd}
         >
           Tambah Data
