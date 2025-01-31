@@ -2,7 +2,7 @@
 
 import TakeCertificationContent from '@/app/take-certification/components/TakeCertificationContent';
 import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
-import { Layer, Screen } from '@/shared/components';
+import { Screen } from '@/shared/components';
 import { CheckBadgeIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 

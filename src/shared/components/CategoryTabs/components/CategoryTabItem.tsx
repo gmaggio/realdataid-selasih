@@ -24,7 +24,7 @@ const CategoryTabItem: React.FC<CategoryTabItemProps> = ({
         className={twMerge(
           clsx(
             'text-base text-txtBody2 font-bold',
-            'pt-5',
+            'pt-5 pr-0.5',
             'relative',
             'before:content-[""]',
             'before:absolute',

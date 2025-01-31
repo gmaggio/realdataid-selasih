@@ -1,3 +1,4 @@
+import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
 import { CategoryTabs, Layer, Table, Tabs } from '@/shared/components';
 import LayerHeader from '@/shared/components/Layer/components/LayerHeader';
 import clsx from 'clsx';
@@ -29,7 +30,7 @@ const TakeCertificationContent: React.FC = () => {
         ]}
       />
 
-      <div className={clsx('flex- flex-col gap-3')}>
+      <div className={clsx('flex flex-col gap-1')}>
         <Table
           header={{
             title: 'Bahan baku utama',
@@ -51,7 +52,7 @@ const TakeCertificationContent: React.FC = () => {
         />
       </div>
 
-      <div className={clsx('py-5')}>TEST</div>
+      <TakeCertificationFooter />
     </Layer>
   );
 };

@@ -110,17 +110,18 @@ const Table: React.FC<TableProps> = ({ header }) => {
 
       <table
         className={clsx(
+          // Table
           'table-auto',
           'border border-tableBorder rounded-md',
           'border-separate border-spacing-0',
           'overflow-clip',
 
           // All Cells
-          '[&_:is(th,td)]:px-3 [&_:is(th,td)]:py-2',
+          '[&_:is(th,td)]:px-3 [&_:is(th,td)]:py-1.5',
 
           // Last Column Cells
-          '[&_:is(th,td)]:last:px-1.5 [&_:is(th,td)]:last:py-0',
           '[&_:is(th,td)]:last:w-min',
+          '[&_:is(th,td)]:last:px-1.5 [&_:is(th,td)]:last:py-0',
 
           // Header Cells
           '[&_th]:text-left',

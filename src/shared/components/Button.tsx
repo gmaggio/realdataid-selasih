@@ -20,9 +20,9 @@ export const buttonVariants = tv({
       support: 'bg-btnSupport text-txtHeading',
     },
     size: {
-      lg: 'px-7.5 py-3 text-lg',
-      md: 'px-7 py-2.5 text-base',
-      sm: 'p-2.5 text-base gap-1.5',
+      lg: 'px-7.5 py-2 text-lg',
+      md: 'px-7 py-2 text-base',
+      sm: 'px-2.5 py-2 text-base gap-1.5',
     },
   },
   defaultVariants: {
