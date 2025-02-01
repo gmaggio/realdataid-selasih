@@ -154,6 +154,23 @@
     z-index: -1000;
     /* display: none; */
   }
+  dialog > div::before {
+    content: '';
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/TEMPLATE/ProsesSertifikasi-PopUp.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    opacity: 0.5;
+    /* opacity: 0; */
+    z-index: -1000;
+    /* display: none; */
+  }
   /* ---> TEST: END */
 
   html {

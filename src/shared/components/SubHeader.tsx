@@ -7,7 +7,11 @@ export interface SubHeaderProps {
   title: string;
 }
 
-const SubHeader: React.FC<SubHeaderProps> = ({ icon, heading, title }) => {
+const SubHeader: React.FC<SubHeaderProps> = ({
+  icon: Icon,
+  heading,
+  title,
+}) => {
   return (
     <div
       className={clsx(
@@ -24,7 +28,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ icon, heading, title }) => {
           'text-txtHilite bg-surfaceSecondary',
         )}
       >
-        <icon />
+        <Icon />
       </div>
       <div className={clsx('flex-flex-col gap-2')}>
         <div className={clsx('text-sm text-txtBody2')}>{heading}</div>

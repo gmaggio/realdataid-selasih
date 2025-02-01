@@ -1,10 +1,21 @@
 import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
-import { CategoryTabs, Layer, Table, Tabs } from '@/shared/components';
+import {
+  Button,
+  CategoryTabs,
+  IconButton,
+  Layer,
+  Modal,
+  Table,
+  Tabs,
+} from '@/shared/components';
 import LayerHeader from '@/shared/components/Layer/components/LayerHeader';
+import { BellIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 
 const TakeCertificationContent: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <Layer>
       <LayerHeader title="Formulir Persyaratan Teknis" />
@@ -36,7 +47,7 @@ const TakeCertificationContent: React.FC = () => {
             title: 'Bahan baku utama',
             description:
               'Semua bahan baku utama yang diperlukan agar produk dapat diproduksi (Periode 12 bulan terakhir).',
-            onAdd: () => {},
+            onAdd: () => setShowModal(true),
             required: true,
           }}
         />
@@ -46,13 +57,26 @@ const TakeCertificationContent: React.FC = () => {
             title: 'Bahan baku utama',
             description:
               'Semua bahan baku utama yang diperlukan agar produk dapat diproduksi (Periode 12 bulan terakhir).',
-            onAdd: () => {},
+            onAdd: () => setShowModal(true),
             required: true,
           }}
         />
       </div>
 
-      <TakeCertificationFooter />
+      <TakeCertificationFooter
+        onCancel={() => console.log('cancel')}
+        onSaveDraft={() => console.log('save draft')}
+        onNext={() => console.log('next')}
+      />
+
+      {/* Form Dialog */}
+      <Modal id="modal" open={showModal} onClose={() => setShowModal(false)}>
+        <IconButton
+          icon={BellIcon}
+          onClick={() => setShowModal(false)}
+          aria-label="Close modal"
+        />
+      </Modal>
     </Layer>
   );
 };

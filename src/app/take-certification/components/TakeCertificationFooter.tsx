@@ -2,16 +2,22 @@ import { Button } from '@/shared/components';
 import clsx from 'clsx';
 import React from 'react';
 
-export interface TakeCertificationFooterProps {
-  onNext?: () => void;
-  onSaveDraft?: () => void;
+export type AtLeastOne<T, K extends keyof T = keyof T> = Partial<T> &
+  { [P in K]: Required<Pick<T, P>> }[K];
+
+export interface TakeCertificationFooterActionProps {
   onCancel?: () => void;
+  onSaveDraft?: () => void;
+  onNext?: () => void;
 }
 
+export type TakeCertificationFooterProps =
+  AtLeastOne<TakeCertificationFooterActionProps>;
+
 const TakeCertificationFooter: React.FC<TakeCertificationFooterProps> = ({
-  onNext,
-  onSaveDraft,
   onCancel,
+  onSaveDraft,
+  onNext,
 }) => {
   return (
     <div
@@ -22,23 +28,29 @@ const TakeCertificationFooter: React.FC<TakeCertificationFooterProps> = ({
         'border-b border-lineSecondary',
       )}
     >
-      <Button
-        variants={{
-          type: 'outlineAlt',
-        }}
-      >
-        Batalkan
-      </Button>
-
-      <div className={clsx('flex flex-row gap-3 items-center')}>
+      {onCancel && (
         <Button
           variants={{
-            type: 'outline',
+            type: 'outlineAlt',
           }}
+          onClick={onCancel}
         >
-          Simpan draf
+          Batalkan
         </Button>
-        <Button>Selanjutnya</Button>
+      )}
+
+      <div className={clsx('flex flex-row gap-3 items-center')}>
+        {onSaveDraft && (
+          <Button
+            variants={{
+              type: 'outline',
+            }}
+            onClick={onSaveDraft}
+          >
+            Simpan draf
+          </Button>
+        )}
+        {onNext && <Button onClick={onNext}>Selanjutnya</Button>}
       </div>
     </div>
   );
