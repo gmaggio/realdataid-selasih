@@ -1,14 +1,13 @@
 import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
+import TakeCertificationForm from '@/app/take-certification/components/TakeCertificationForm';
 import {
-  Button,
   CategoryTabs,
   IconButton,
   Layer,
-  Modal,
   Table,
   Tabs,
 } from '@/shared/components';
-import LayerHeader from '@/shared/components/Layer/components/LayerHeader';
+import LayerHeader from '@/shared/components/Layer/LayerHeader';
 import { BellIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import React, { useState } from 'react';
@@ -69,14 +68,18 @@ const TakeCertificationContent: React.FC = () => {
         onNext={() => console.log('next')}
       />
 
-      {/* Form Dialog */}
-      <Modal id="modal" open={showModal} onClose={() => setShowModal(false)}>
+      {/* Form Modal Window */}
+      <TakeCertificationForm
+        id="form-modal"
+        open={showModal}
+        onClose={() => setShowModal(false)}
+      >
         <IconButton
           icon={BellIcon}
           onClick={() => setShowModal(false)}
-          aria-label="Close modal"
+          aria-label="Close form modal"
         />
-      </Modal>
+      </TakeCertificationForm>
     </Layer>
   );
 };
