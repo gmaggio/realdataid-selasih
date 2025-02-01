@@ -100,6 +100,7 @@
   --color-surfaceBase: var(--color-primary-100);
   --color-surfacePrimary: var(--color-base-white);
   --color-surfaceSecondary: var(--color-primary-300);
+  --color-surfaceInactive: var(--color-neutral-300);
 
   --color-linePrimary: var(--color-neutral-300);
   --color-lineSecondary: var(--color-neutral-100);
@@ -185,4 +186,18 @@
 }
 
 @layer components {
+  label {
+    @apply text-base text-txtBody font-bold;
+  }
+
+  input {
+    @apply focus:border-none focus:outline-none;
+  }
+  .input {
+    @apply text-base text-txtBody font-bold;
+    @apply flex items-center;
+    @apply px-3 py-1.5;
+    @apply bg-surfacePrimary;
+    @apply border border-linePrimary rounded-sm;
+  }
 }

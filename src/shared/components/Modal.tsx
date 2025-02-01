@@ -60,7 +60,9 @@ const Modal: React.FC<ModalProps> = ({
         ref={overlayRef}
         className={clsx(
           'fixed inset-0 grid place-content-center',
-          'bg-black/75 opacity-0',
+          // 'bg-[black]/75 opacity-0',
+
+          'bg-[black] opacity-100', // TEST:
 
           // Animate
           'transition-all group-data-[open]:opacity-100',
@@ -71,6 +73,8 @@ const Modal: React.FC<ModalProps> = ({
           className={twMerge(
             clsx(
               'scale-75 opacity-0',
+
+              'bg-surfacePrimary/50 h-[711px]', // TEST:
 
               // Animate
               'transition-all',
@@ -86,6 +90,7 @@ const Modal: React.FC<ModalProps> = ({
                 ...(header?.actions || []),
                 hasCloseButton && (
                   <IconButton
+                    key="modal-close"
                     icon={XMarkIcon}
                     iconClass="text-txtBody2"
                     onClick={onClose}

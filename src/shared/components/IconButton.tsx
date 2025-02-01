@@ -42,7 +42,7 @@ export type IconButtonProps =
   | IconButtonFromElementProps;
 
 const IconButton: React.FC<IconButtonProps> = (props) => {
-  const { className, variants, ...rest } = props;
+  const { className, iconClass, variants, ...rest } = props;
 
   return (
     <button
