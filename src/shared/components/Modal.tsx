@@ -1,4 +1,3 @@
-import Layer from '@/shared/components/Layer/Layer';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import {
@@ -7,17 +6,28 @@ import {
   useRef,
   type ComponentPropsWithoutRef,
 } from 'react';
+import {
+  Layer,
+  LayerHeader,
+  LayerHeaderProps,
+} from '@/shared/components/Layer';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import IconButton from '@/shared/components/IconButton';
 
 export type ModalProps = ComponentPropsWithoutRef<'dialog'> & {
+  header?: LayerHeaderProps;
   modalClass?: HTMLAttributes<HTMLDivElement>['className'];
   onClose: () => void;
+  hasCloseButton?: boolean;
 };
 
 const Modal: React.FC<ModalProps> = ({
+  header,
   children,
   modalClass,
   open,
   onClose,
+  hasCloseButton,
   ...rest
 }) => {
   const ref = useRef<HTMLDialogElement>(null);
@@ -48,27 +58,43 @@ const Modal: React.FC<ModalProps> = ({
     <dialog ref={ref} className="group" {...rest}>
       <div
         ref={overlayRef}
-        className={twMerge(
-          clsx(
-            'fixed inset-0 grid place-content-center',
-            'bg-black/75 opacity-0',
+        className={clsx(
+          'fixed inset-0 grid place-content-center',
+          'bg-black/75 opacity-0',
 
-            // Animate
-            'transition-all group-data-[open]:opacity-100',
-          ),
-          modalClass,
+          // Animate
+          'transition-all group-data-[open]:opacity-100',
         )}
         onClick={handleOutsideClick}
       >
         <Layer
-          className={clsx(
-            'scale-75 opacity-0',
+          className={twMerge(
+            clsx(
+              'scale-75 opacity-0',
 
-            // Animate
-            'transition-all',
-            'group-data-[open]:scale-100 group-data-[open]:opacity-100',
+              // Animate
+              'transition-all',
+              'group-data-[open]:scale-100 group-data-[open]:opacity-100',
+            ),
+            modalClass,
           )}
         >
+          {(header || hasCloseButton) && (
+            <LayerHeader
+              title={header?.title || ''}
+              actions={[
+                ...(header?.actions || []),
+                hasCloseButton && (
+                  <IconButton
+                    icon={XMarkIcon}
+                    iconClass="text-txtBody2"
+                    onClick={onClose}
+                  />
+                ),
+              ]}
+              actionsClass={header?.actionsClass}
+            />
+          )}
           {children}
         </Layer>
       </div>

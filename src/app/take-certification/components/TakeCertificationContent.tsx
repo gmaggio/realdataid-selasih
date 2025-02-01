@@ -8,7 +8,7 @@ import {
   Tabs,
 } from '@/shared/components';
 import LayerHeader from '@/shared/components/Layer/LayerHeader';
-import { BellIcon } from '@heroicons/react/24/outline';
+import { BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 
