@@ -1,7 +1,5 @@
-import { BahanBakuMainData } from '@/app/take-certification/models/types';
 import Button from '@/shared/components/Button';
-import IconButton from '@/shared/components/IconButton';
-import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { PlusIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -10,24 +8,24 @@ export interface TableColumnProps {
   accessor: string;
 }
 
-export interface TableProps {
+export interface TableProps<T> {
   header?: TableHeaderProps;
   columns: TableColumnProps[];
-  data: any[];
-  dataBuilder: (
+  data: T[];
+  cellBuilder: (
     column: TableColumnProps,
-    rowData: any,
+    rowData: T,
     rowIndex: number,
-    defaultData: string | number | React.ReactNode,
+    defaultCell: string | number | React.ReactNode,
   ) => string | number | React.ReactNode;
 }
 
-const Table: React.FC<TableProps> = ({
+const Table = <T extends object>({
   header,
   columns,
   data,
-  dataBuilder,
-}) => {
+  cellBuilder,
+}: TableProps<T>) => {
   return (
     <div className={clsx('flex flex-col gap-4.5', 'w-full pt-2.5 pb-5')}>
       {header && <TableHeader {...header} />}
@@ -70,7 +68,7 @@ const Table: React.FC<TableProps> = ({
             <tr key={rowIndex}>
               {columns.map((column) => (
                 <td key={column.accessor}>
-                  {dataBuilder(
+                  {cellBuilder(
                     column,
                     row,
                     rowIndex,

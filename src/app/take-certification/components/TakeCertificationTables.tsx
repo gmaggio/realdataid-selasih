@@ -105,7 +105,7 @@ const TakeCertificationTables: React.FC = () => {
   return (
     <>
       <div className={clsx('flex flex-col gap-1')}>
-        <Table
+        <Table<BahanBakuMainData>
           header={{
             title: 'Bahan baku utama',
             description:
@@ -115,7 +115,7 @@ const TakeCertificationTables: React.FC = () => {
           }}
           columns={columns}
           data={data}
-          dataBuilder={(column, rowData, _, defaultData) => {
+          cellBuilder={(column, rowData, _, defaultCell) => {
             if (column.accessor === 'total_penggunaan') {
               return (
                 <div className={clsx('flex gap-3 justify-between')}>
@@ -134,7 +134,7 @@ const TakeCertificationTables: React.FC = () => {
               );
             }
 
-            return defaultData;
+            return defaultCell;
           }}
         />
       </div>
