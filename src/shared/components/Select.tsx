@@ -26,8 +26,6 @@ const Select: React.FC<SelectProps> = ({
           'bg-no-repeat',
           'bg-[position:right_.875rem_center]',
           'bg-[size:.75rem_.75rem]',
-
-          'bg-logo-green-accent/30', // TEST:
         ),
         className,
       )}

@@ -63,6 +63,7 @@ const TakeCertificationContent: React.FC = () => {
       </div>
 
       <TakeCertificationFooter
+        classClass={clsx('px-7.5!')}
         onCancel={() => console.log('cancel')}
         onSaveDraft={() => console.log('save draft')}
         onNext={() => console.log('next')}

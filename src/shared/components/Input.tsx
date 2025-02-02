@@ -20,8 +20,6 @@ const Input: React.FC<InputProps> = ({
       className={twMerge(
         'inputBox',
         clsx(
-          // '*:flex-[0_0_0%]',
-
           // Focus
           'focus-within:border-lineTertiary/50',
 
@@ -32,8 +30,6 @@ const Input: React.FC<InputProps> = ({
 
           // Invalid
           'has-[input:invalid]:border-semanticImportant',
-
-          'bg-logo-green-accent/30' /* TEST: */,
         ),
         containerClass,
       )}

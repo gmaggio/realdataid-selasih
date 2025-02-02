@@ -61,9 +61,7 @@ const Modal: React.FC<ModalProps> = ({
         className={clsx(
           'fixed inset-0 grid place-content-center',
           'overflow-scroll',
-          // 'bg-[black]/75 opacity-0',
-
-          'bg-[black] opacity-100', // TEST:
+          'bg-[black]/75 opacity-0',
 
           // Animate
           'transition-all group-data-[open]:opacity-100',

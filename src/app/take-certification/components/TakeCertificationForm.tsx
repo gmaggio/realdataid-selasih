@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { default as chevronDown } from '@/shared/assets/icons/chevron-down.svg';
 import { twMerge } from 'tailwind-merge';
+import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
 
 export type TakeCertificationFormProps = ModalProps;
 
@@ -17,13 +18,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 }) => {
   return (
     <Modal
-      modalClass={clsx(
-        'w-[36rem] max-w-[36rem]',
-
-        // TEST:
-        'bg-surfacePrimary/50',
-        // 'h-[711px]',
-      )}
+      modalClass={clsx('w-[36rem] max-w-[36rem]')}
       {...rest}
       header={{
         title: 'Tambah Bahan Baku Utama',
@@ -90,7 +85,12 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
       {/* FORM 2 */}
       <div
         id="form2"
-        className={clsx('inputText', 'flex flex-col', 'gap-2.5', 'px-4!')}
+        className={clsx(
+          'inputText',
+          'flex flex-col',
+          'gap-2.5',
+          'px-4! pb-2.5',
+        )}
       >
         <span>Rincian Penggunaan</span>
         <div
@@ -112,9 +112,6 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 
             // Field Elements
             '[&>.group>div]:*:w-full',
-
-            // TEST:
-            '[&>.group]:bg-semanticImportant/20',
           )}
         >
           {Array(2)
@@ -162,6 +159,13 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
           <div className="group"></div>
         </div>
       </div>
+
+      <TakeCertificationFooter
+        classClass={clsx('px-3.5! py-2.5')}
+        onCancel={() => console.log('cancel')}
+        onSaveDraft={() => console.log('save draft')}
+        onNext={() => console.log('next')}
+      />
     </Modal>
   );
 };

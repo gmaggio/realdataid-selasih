@@ -1,6 +1,7 @@
 import { Button } from '@/shared/components';
 import clsx from 'clsx';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export type AtLeastOne<T, K extends keyof T = keyof T> = Partial<T> &
   { [P in K]: Required<Pick<T, P>> }[K];
@@ -9,6 +10,7 @@ export interface TakeCertificationFooterActionProps {
   onCancel?: () => void;
   onSaveDraft?: () => void;
   onNext?: () => void;
+  classClass?: HTMLAttributes<HTMLDivElement>['className'];
 }
 
 export type TakeCertificationFooterProps =
@@ -18,14 +20,18 @@ const TakeCertificationFooter: React.FC<TakeCertificationFooterProps> = ({
   onCancel,
   onSaveDraft,
   onNext,
+  classClass,
 }) => {
   return (
     <div
-      className={clsx(
-        'flex flex-row items-center justify-between',
-        'text-2xl text-txtHeading font-bold',
-        'px-7.5! py-6.5',
-        'border-b border-lineSecondary',
+      className={twMerge(
+        clsx(
+          'flex flex-row items-center justify-between',
+          'text-2xl text-txtHeading font-bold',
+          'py-6.5',
+          'border-t border-lineSecondary',
+        ),
+        classClass,
       )}
     >
       {onCancel && (
