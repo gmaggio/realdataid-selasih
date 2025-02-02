@@ -156,11 +156,10 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
                     i++
                   ) {
                     monthField.push(
-                      <div>
+                      <div key={`bulan-${i}`}>
                         <label htmlFor={`bulan_${i}`}>Bulan {i}</label>
                         <Input
                           type="text"
-                          key={`bulan-${i}`}
                           id={`bulan-${i}`}
                           name={`bulan_${i}`}
                           placeholder="0"

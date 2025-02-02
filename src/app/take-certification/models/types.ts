@@ -32,3 +32,8 @@ export interface BahanBakuAddition {
   kode_file: string;
   nama: string;
 }
+
+export interface LiniProduksiData {
+  kode: string;
+  nama: string;
+}

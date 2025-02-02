@@ -8,14 +8,9 @@ const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${MOCK_TOKEN}`,
+    // Authorization: `Bearer ${MOCK_TOKEN}`, // TODO: Set correct token
   },
 });
-
-// Get Lini Produksi
-// TODO: Update `unknown` to match the response data type
-export const fetchLiniProduksi = async (uuidTransaksi: string) =>
-  apiClient.post('/lini-produksi/select', { uuid_transaksi: uuidTransaksi });
 
 // Fetch Bahan Baku
 export const fetchBahanBaku = async (uuidTransaksi: string) =>
@@ -37,10 +32,6 @@ export const deleteBahanBaku = async (kode: string, uuidUser: string) =>
 export const fetchBahanBakuDetail = async (kodeBahanBaku: string) =>
   apiClient.post('/bahan-baku-utama/detail', { kode_bahan_baku: kodeBahanBaku });
 
-// Save Bahan Baku Detail
-export const postBahanBakuDetail = async (data: BahanBakuData) =>
-  apiClient.post('/bahan-baku-utama/detail', data);
-
 // Upload File
 export const uploadFile = async (file: File, uuidUser: string) => {
   const formData = new FormData();
@@ -51,3 +42,13 @@ export const uploadFile = async (file: File, uuidUser: string) => {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 };
+
+/* FORM DATA */
+
+// Get Lini Produksi
+export const fetchLiniProduksi = async (uuidTransaksi: string) =>
+  apiClient.post('/lini-produksi/select', { uuid_transaksi: uuidTransaksi });
+
+// Get Bahan Baku Satuan
+export const fetchBahanBakuSatuan = async (uuidTransaksi: string) =>
+  apiClient.post('/bahan-baku-utama/satuan ', { uuid_transaksi: uuidTransaksi });
