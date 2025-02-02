@@ -193,10 +193,18 @@
   input {
     @apply focus:border-none focus:outline-none;
   }
-  .input {
+  .inputText,
+  .inputLayout,
+  .inputBox {
     @apply text-base text-txtBody font-bold;
-    @apply flex items-center;
+  }
+  .inputLayout,
+  .inputBox {
+    @apply flex items-center justify-between;
     @apply px-3 py-1.5;
+  }
+
+  .inputBox {
     @apply bg-surfacePrimary;
     @apply border border-linePrimary rounded-sm;
   }

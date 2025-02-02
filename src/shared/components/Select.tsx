@@ -19,9 +19,8 @@ const Select: React.FC<SelectProps> = ({
   return (
     <select
       className={twMerge(
+        'inputBox',
         clsx(
-          'input',
-
           // Appearance
           'appearance-none',
           'bg-no-repeat',
@@ -39,7 +38,11 @@ const Select: React.FC<SelectProps> = ({
       {...rest}
     >
       {options.map(({ value, label }) => (
-        <option value={value} style={{ fontFamily: 'Inter, sans-serif' }}>
+        <option
+          key={value}
+          value={value}
+          style={{ fontFamily: 'Inter, sans-serif' }}
+        >
           {label}
         </option>
       ))}

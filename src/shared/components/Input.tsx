@@ -18,8 +18,9 @@ const Input: React.FC<InputProps> = ({
   return (
     <div
       className={twMerge(
+        'inputBox',
         clsx(
-          'input',
+          // '*:flex-[0_0_0%]',
 
           // Focus
           'focus-within:border-lineTertiary/50',
@@ -39,7 +40,11 @@ const Input: React.FC<InputProps> = ({
       {...rest}
     >
       {leading}
-      <input className={twMerge(clsx('flex-1'), className)} {...rest} />
+      <input
+        // size={50}
+        className={twMerge(clsx('w-full'), className)}
+        {...rest}
+      />
       {trailing}
     </div>
   );
