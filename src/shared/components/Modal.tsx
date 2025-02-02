@@ -60,6 +60,7 @@ const Modal: React.FC<ModalProps> = ({
         ref={overlayRef}
         className={clsx(
           'fixed inset-0 grid place-content-center',
+          'overflow-scroll',
           // 'bg-[black]/75 opacity-0',
 
           'bg-[black] opacity-100', // TEST:
@@ -70,11 +71,12 @@ const Modal: React.FC<ModalProps> = ({
         onClick={handleOutsideClick}
       >
         <Layer
+          id="modal-layer"
           className={twMerge(
             clsx(
+              'h-fit',
+              'm-6',
               'scale-75 opacity-0',
-
-              'bg-surfacePrimary/50 h-[711px]', // TEST:
 
               // Animate
               'transition-all',

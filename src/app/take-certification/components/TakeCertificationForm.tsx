@@ -17,7 +17,13 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 }) => {
   return (
     <Modal
-      modalClass={clsx('w-[36rem] max-w-[36rem]')}
+      modalClass={clsx(
+        'w-[36rem] max-w-[36rem]',
+
+        // TEST:
+        'bg-surfacePrimary/50',
+        // 'h-[711px]',
+      )}
       {...rest}
       header={{
         title: 'Tambah Bahan Baku Utama',
@@ -117,8 +123,13 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
               <div className="group">
                 {(() => {
                   const monthField = [];
+                  const maxRow = 6;
 
-                  for (let i = colIndex * 6 + 1; i <= colIndex * 6 + 6; i++) {
+                  for (
+                    let i = colIndex * maxRow + 1;
+                    i <= colIndex * maxRow + maxRow;
+                    i++
+                  ) {
                     monthField.push(
                       <div>
                         <label htmlFor={`bulan_${i}`}>Bulan {i}</label>
