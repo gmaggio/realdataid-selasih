@@ -59,12 +59,15 @@ const Button: React.FC<ButtonProps> = (props) => {
   return (
     <button className={twMerge(buttonVariants(variants), className)} {...rest}>
       {'icon' in props && props.icon && (
-        <div className={twMerge('size-4.5', props.iconClass)}>
+        <div
+          data-type="button-icon"
+          className={twMerge('size-4.5', props.iconClass)}
+        >
           <props.icon />
         </div>
       )}
       {!('icon' in props) && 'iconElement' in props && props.iconElement}
-      {children}
+      <span>{children}</span>
     </button>
   );
 };

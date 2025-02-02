@@ -13,6 +13,7 @@ const sidebarMenuItemVariants = tv({
     'font-bold text-base',
     'w-full',
     'cursor-pointer',
+    'whitespace-nowrap',
   ),
   variants: {
     type: {
@@ -103,11 +104,14 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
         disabled={variants?.disabled === true}
         style={{ width: '100%' }}
         icon={icon}
-        iconClass={sidebarMenuItemIconVariants({
-          disabled:
-            variants?.disabled === true &&
-            (variants?.type === undefined || variants?.type === 'primary'),
-        })}
+        iconClass={twMerge(
+          sidebarMenuItemIconVariants({
+            disabled:
+              variants?.disabled === true &&
+              (variants?.type === undefined || variants?.type === 'primary'),
+          }),
+          'min-w-4.5',
+        )}
         className={twMerge(
           sidebarMenuItemVariants({ ...variants, active: isActive }),
           className,

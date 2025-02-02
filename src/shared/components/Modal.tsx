@@ -64,7 +64,8 @@ const Modal: React.FC<ModalProps> = ({
           'bg-[black]/75 opacity-0',
 
           // Animate
-          'transition-all group-data-[open]:opacity-100',
+          'transition-all duration-500',
+          'group-data-[open]:opacity-100',
         )}
         onClick={handleOutsideClick}
       >
@@ -77,7 +78,7 @@ const Modal: React.FC<ModalProps> = ({
               'scale-75 opacity-0',
 
               // Animate
-              'transition-all',
+              'transition-all duration-500',
               'group-data-[open]:scale-100 group-data-[open]:opacity-100',
             ),
             modalClass,

@@ -120,6 +120,7 @@
   /* Layouts */
 
   --spacing-sidebar: 14.5rem;
+  --spacing-sidebarCollapsed: 4.5625rem;
   --spacing-headerHeight: 10rem;
 
   --radius-button: var(--radius-lg);
@@ -136,47 +137,6 @@
 }
 
 @layer base {
-  /* TEST: Tracing: delete when done - START ---> */
-  /* html {
-    min-width: 1248px;
-    min-height: 1051px;
-  } */
-  html::before {
-    content: '';
-    /* width: 1248px; */
-    /* height: 1051px; */
-    width: 100vw;
-    height: 100vh;
-    background-image: url('/TEMPLATE/ProsesSertifikasi.png');
-    background-repeat: no-repeat;
-    background-position: left top;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    opacity: 0.5;
-    /* opacity: 0; */
-    z-index: -1000;
-    /* display: none; */
-  }
-  dialog > div::before {
-    content: '';
-    width: 100vw;
-    height: 100vh;
-    background-image: url('/TEMPLATE/ProsesSertifikasi-PopUp.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    opacity: 0.5;
-    /* opacity: 0; */
-    z-index: -1000;
-    /* display: none; */
-  }
-  /* ---> TEST: END */
-
   html {
     @apply w-auto h-auto overscroll-none;
   }
