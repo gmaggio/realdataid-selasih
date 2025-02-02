@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   options: {
-    value: string;
+    value: string | number;
     label: string;
   }[];
 };

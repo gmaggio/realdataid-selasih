@@ -7,7 +7,7 @@ import {
   Select,
 } from '@/shared/components';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export type TakeCertificationFormProps = ModalProps;
@@ -15,6 +15,14 @@ export type TakeCertificationFormProps = ModalProps;
 const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   ...rest
 }) => {
+  const [unit, setUnit] = useState(1);
+
+  const units = [
+    { value: '1', label: 'Ton' },
+    { value: '2', label: 'Kg' },
+    { value: '3', label: 'Liter' },
+  ];
+
   return (
     <Modal
       modalClass={clsx('w-[36rem] max-w-[36rem]')}
@@ -45,37 +53,58 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
         )}
       >
         <div>
-          <label htmlFor="fname">Name 1</label>
-          <Input type="text" id="fname" name="fname" placeholder="John" />
-        </div>
-
-        <div>
-          <label htmlFor="fname">Name 2</label>
-          <Input type="text" id="fname" name="fname" placeholder="John" />
-        </div>
-
-        <div>
-          <label htmlFor="fname">Name 3</label>
-          <Input type="text" id="fname" name="fname" placeholder="John" />
-        </div>
-
-        <div>
-          <label htmlFor="fname">Name 4</label>
-          <Input type="text" id="fname" name="fname" placeholder="John" />
-        </div>
-
-        <div>
-          <label htmlFor="fname">Name 5</label>
-          <Input type="text" id="fname" name="fname" placeholder="John" />
-        </div>
-
-        <div>
-          <label htmlFor="fname">Name 6</label>
+          <label htmlFor="lini_produksi">Lini Produksi</label>
           <Select
+            id="lini_produksi"
+            name="lini_produksi"
             options={[
-              { value: '1', label: '1' },
-              { value: '2', label: '2' },
-              { value: '3', label: '3' },
+              { value: '1', label: 'Besi' },
+              { value: '2', label: 'Kayu' },
+              { value: '3', label: 'Tanah' },
+            ]}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="nama">Nama Bahan Baku</label>
+          <Input type="text" id="nama" name="nama" />
+        </div>
+
+        <div>
+          <label htmlFor="tipe_bahan_baku">Tipe Bahan Baku</label>
+          <Input type="text" id="tipe_bahan_baku" name="tipe_bahan_baku" />
+        </div>
+
+        <div>
+          <label htmlFor="satuan">Satuan</label>
+          <Select
+            id="satuan"
+            name="satuan"
+            options={units}
+            onChange={(e) => setUnit(Number(e.target.value))}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="jenis_bahan_baku">Jenis Bahan Baku</label>
+          <Select
+            id="jenis_bahan_baku"
+            name="jenis_bahan_baku"
+            options={[
+              { value: '1', label: 'Daur Ulang' },
+              { value: '2', label: 'Non Daur Ulang' },
+            ]}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="asal_bahan_baku">Asal Bahan Baku</label>
+          <Select
+            id="asal_bahan_baku"
+            name="asal_bahan_baku"
+            options={[
+              { value: '1', label: 'Impor' },
+              { value: '2', label: 'Ekspor' },
             ]}
           />
         </div>
@@ -135,7 +164,15 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
                           id={`bulan-${i}`}
                           name={`bulan_${i}`}
                           placeholder="0"
-                          trailing={<span>Ton</span>}
+                          trailing={
+                            <span>
+                              {
+                                units.find(
+                                  ({ value }) => value === unit.toString(),
+                                )?.label
+                              }
+                            </span>
+                          }
                         />
                       </div>,
                     );
