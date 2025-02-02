@@ -2,6 +2,7 @@ import SidebarMenuItem from '@/shared/components/Sidebar/components/SidebarMenuI
 import {
   ArrowRightStartOnRectangleIcon,
   CheckBadgeIcon,
+  ChevronLeftIcon,
   CreditCardIcon,
   DocumentTextIcon,
   HomeIcon,
@@ -12,6 +13,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import React from 'react';
 import SidebarMenu from './components/SidebarMenu';
+import IconButton from '@/shared/components/IconButton';
 
 const Sidebar: React.FC = () => {
   return (
@@ -21,11 +23,11 @@ const Sidebar: React.FC = () => {
           'fixed',
           'flex flex-col gap-4 shrink-0',
           'w-sidebar h-screen z-100',
-          // 'bg-surfacePrimary',
+          'bg-surfacePrimary',
 
-          'bg-surfacePrimary/50', // TEST:
+          // 'bg-surfacePrimary/50', // TEST:
 
-          'shadow-[4px_0px_10px_0px_rgba(0,_0,_0,_0.1)]',
+          'drop-shadow-[4px_0px_4px_rgba(0,_0,_0,_0.1)]',
         )}
       >
         <SidebarHeader />
@@ -114,11 +116,27 @@ const SidebarHeader: React.FC = () => {
   return (
     <div
       className={clsx(
+        'relative',
         'flex flex-col shrink-0 gap-2.5 items-center justify-end',
         'h-headerHeight px-3.5',
         'text-center text-txtHeading',
       )}
     >
+      <IconButton
+        icon={ChevronLeftIcon}
+        className={clsx(
+          'absolute',
+          'right-0 translate-x-1/2',
+          'top-[5.625rem]',
+        )}
+        iconClass={clsx(
+          'bg-btnPrimary',
+          'p-1',
+          'rounded-full',
+          'size-6 text-txtOnDark',
+        )}
+      />
+
       <Image
         priority
         src="/logo/logo-industri-hijau.png"
