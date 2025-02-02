@@ -1,11 +1,24 @@
 import TakeCertificationForm from '@/app/take-certification/components/TakeCertificationForm';
+import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
+import { useID } from '@/app/take-certification/hooks/useIdContext';
 import { BahanBakuMainData } from '@/app/take-certification/models/types';
-import { IconButton, Table } from '@/shared/components';
-import { BellIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { Button, IconButton, Table } from '@/shared/components';
+import {
+  ArrowPathIcon,
+  BellIcon,
+  ExclamationTriangleIcon,
+  PencilIcon,
+  TrashIcon,
+} from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const TakeCertificationTables: React.FC = () => {
+  const { uuid_transaksi, mockBahanBakuList } = useID();
+
+  const { data, setData, isLoading, error, setError, refetch } =
+    useBahanBakuData(uuid_transaksi);
+
   const [showModal, setShowModal] = useState(false);
 
   const columns = [
@@ -39,7 +52,7 @@ const TakeCertificationTables: React.FC = () => {
     },
   ];
 
-  const data: BahanBakuMainData[] = [
+  /* const data: BahanBakuMainData[] = [
     {
       kode: '',
       kode_transaksi_id: '',
@@ -52,55 +65,65 @@ const TakeCertificationTables: React.FC = () => {
       total_penggunaan: '50.489',
       satuan: 'Ton',
     },
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 20%',
-      jenis_bahan_baku: 'Non Daur Ulang',
-      asal_bahan_baku: 'Ekspor',
-      total_penggunaan: '20',
-      satuan: 'Ton',
-    },
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-  ];
+  ]; */
+
+  if (isLoading)
+    return (
+      <div
+        className={clsx(
+          'flex items-center justify-center',
+          'w-full px-7.5 py-16',
+          'text-txtBody2/70',
+        )}
+      >
+        <ArrowPathIcon className={clsx('size-6 animate-spin', 'mr-2.5')} />
+        <p>Loading Bahan Baku data...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div
+        className={clsx(
+          'flex flex-col gap-4 items-center justify-center',
+          'w-full px-7.5 pt-16 pb-18',
+          'text-semanticImportant text-xl',
+        )}
+      >
+        <div
+          className={clsx(
+            'flex items-center justify-center',
+            'text-semanticImportant text-xl',
+          )}
+        >
+          <ExclamationTriangleIcon className={clsx('size-6', 'mr-2.5')} />
+          <p>{error}</p>
+        </div>
+
+        <Button
+          variants={{
+            type: 'outline',
+            size: 'sm',
+          }}
+          onClick={refetch}
+        >
+          Retry fetching data
+        </Button>
+
+        <Button
+          variants={{
+            type: 'outlineAlt',
+            size: 'sm',
+          }}
+          onClick={() => {
+            setData(mockBahanBakuList);
+            setError(null);
+          }}
+        >
+          Use mock data instead
+        </Button>
+      </div>
+    );
 
   return (
     <>

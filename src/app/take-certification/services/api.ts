@@ -1,4 +1,5 @@
-import { BahanBakuData } from '@/app/take-certification/models/types';
+import { BahanBakuData, BahanBakuMainData } from '@/app/take-certification/models/types';
+import { ApiResponse } from '@/core/types/ApiResponse';
 import axios from 'axios';
 
 const API_BASE_URL = 'http://kemenperin.dev-rdi.tech:8001/perusahaan/take-certification';
@@ -13,8 +14,10 @@ const apiClient = axios.create({
 });
 
 // Fetch Bahan Baku
-export const fetchBahanBaku = async (uuidTransaksi: string) =>
-  apiClient.post('/bahan-baku-utama/get', { uuid_transaksi: uuidTransaksi });
+export const fetchBahanBaku = async (uuidTransaksi: string): Promise<ApiResponse<BahanBakuMainData[]>> => {
+  const response = await apiClient.post("/bahan-baku-utama/get", { uuid_transaksi: uuidTransaksi });
+  return response.data;
+};
 
 // Save Bahan Baku
 export const postBahanBaku = async (data: BahanBakuData) =>

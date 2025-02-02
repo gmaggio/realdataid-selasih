@@ -1,27 +1,30 @@
-import { useEffect, useState } from 'react';
-import { BahanBakuData } from '@/app/take-certification/models/types';
+import { BahanBakuMainData } from '@/app/take-certification/models/types';
 import { getBahanBakuData } from '@/app/take-certification/services/BahanBakuService';
+import { useEffect, useState } from 'react';
 
 export const useBahanBakuData = (uuidTransaksi: string) => {
-  const [data, setData] = useState<BahanBakuData[]>([]);
+  const [data, setData] = useState<BahanBakuMainData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const fetchedData = await getBahanBakuData(uuidTransaksi);
-        setData(fetchedData);
-      } catch (err) {
-        console.error(err);
-        setError('Failed to fetch data');
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const result = await getBahanBakuData(uuidTransaksi);
+      setData(result);
+    } catch (err) {
+      console.error('⚠️ Failed to fetch data', err);
+      setError(
+        "Failed to fetch data" + (err instanceof Error && (": " + err.message))
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    loadData();
+  useEffect(() => {
+    fetchData();
   }, [uuidTransaksi]);
 
-  return { data, isLoading, error };
+  return { data, setData, isLoading, error, setError, refetch: fetchData };
 };

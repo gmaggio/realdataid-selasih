@@ -1,17 +1,19 @@
+import { BahanBakuMainData } from '@/app/take-certification/models/types';
+import axios from 'axios';
 import { fetchBahanBaku } from './api';
-import { BahanBakuData } from '@/app/take-certification/models/types';
 
-export const getBahanBakuData = async (uuidTransaksi: string): Promise<BahanBakuData[]> => {
+export const getBahanBakuData = async (uuidTransaksi: string): Promise<BahanBakuMainData[]> => {
   try {
     const response = await fetchBahanBaku(uuidTransaksi);
-
-    if (!response || !response.data || !Array.isArray(response.data.data)) {
-      throw new Error('Invalid API response');
-    }
-
-    return response.data.data;
+    return response.data;
   } catch (error) {
-    console.error('Failed to fetch Bahan Baku data:', error);
-    throw error;
+    if (axios.isAxiosError(error)) {
+      const message = error.response?.data?.message || error.message;
+      console.error("Failed to fetch Bahan Baku data:", message);
+      throw new Error(message || "Failed to fetch Bahan Baku data.");
+    } else {
+      console.error("Unexpected error:", error);
+      throw new Error("An unexpected error occurred.");
+    }
   }
 };
