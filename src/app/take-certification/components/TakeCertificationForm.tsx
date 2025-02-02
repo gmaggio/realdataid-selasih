@@ -1,3 +1,4 @@
+import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
 import {
   CategoryTabs,
   Input,
@@ -7,9 +8,7 @@ import {
 } from '@/shared/components';
 import clsx from 'clsx';
 import React from 'react';
-import { default as chevronDown } from '@/shared/assets/icons/chevron-down.svg';
 import { twMerge } from 'tailwind-merge';
-import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
 
 export type TakeCertificationFormProps = ModalProps;
 
@@ -117,7 +116,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
           {Array(2)
             .fill(null)
             .map((_, colIndex) => (
-              <div className="group">
+              <div key={`grup-bulan-${colIndex}`} className="group">
                 {(() => {
                   const monthField = [];
                   const maxRow = 6;
@@ -132,6 +131,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
                         <label htmlFor={`bulan_${i}`}>Bulan {i}</label>
                         <Input
                           type="text"
+                          key={`bulan-${i}`}
                           id={`bulan-${i}`}
                           name={`bulan_${i}`}
                           placeholder="0"

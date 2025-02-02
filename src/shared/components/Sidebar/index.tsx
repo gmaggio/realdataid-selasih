@@ -15,74 +15,97 @@ import SidebarMenu from './components/SidebarMenu';
 
 const Sidebar: React.FC = () => {
   return (
-    <div
-      className={clsx(
-        'flex flex-col gap-4 shrink-0',
-        'w-[14.5rem] h-auto z-100',
-        // 'bg-surfacePrimary',
+    <div className={clsx('w-sidebar h-screen z-100')}>
+      <aside
+        className={clsx(
+          'fixed',
+          'flex flex-col gap-4 shrink-0',
+          'w-sidebar h-screen z-100',
+          // 'bg-surfacePrimary',
 
-        'bg-surfacePrimary/50', // TEST:
+          'bg-surfacePrimary/50', // TEST:
 
-        'shadow-[4px_0px_10px_0px_rgba(0,_0,_0,_0.1)]',
-      )}
-    >
-      <SidebarHeader />
-
-      <div
-        className={clsx('flex flex-col gap-4', 'w-full h-full', 'px-3.5 pb-4')}
+          'shadow-[4px_0px_10px_0px_rgba(0,_0,_0,_0.1)]',
+        )}
       >
-        <nav className={clsx('flex-1 h-full')}>
-          <SidebarMenu
-            items={[
-              <SidebarMenuItem
-                key="ajukan-sertifikasi"
-                href=""
-                icon={DocumentTextIcon}
-                variants={{ type: 'hilite' }}
-              >
-                Ajukan Sertifikasi
-              </SidebarMenuItem>,
-              <SidebarMenuItem key="beranda" href="" icon={HomeIcon}>
-                Beranda
-              </SidebarMenuItem>,
-              <SidebarMenuItem key="pembayaran" href="" icon={CreditCardIcon}>
-                Pembayaran
-              </SidebarMenuItem>,
-              <SidebarMenuItem
-                key="proses-sertifikasi"
-                href="/"
-                icon={CheckBadgeIcon}
-              >
-                Proses Sertifikasi
-              </SidebarMenuItem>,
-              <SidebarMenuItem
-                key="bantuan"
-                href=""
-                icon={QuestionMarkCircleIcon}
-              >
-                Bantuan
-              </SidebarMenuItem>,
-            ]}
-          />
-        </nav>
-
-        <nav className={clsx('pt-4.5', 'border-t border-lineSecondary')}>
-          <SidebarMenu
-            items={[
-              <SidebarMenuItem key="pengaturan-profil" href="" icon={UserIcon}>
-                Pengaturan Profil
-              </SidebarMenuItem>,
-              <SidebarMenuItem
-                key="keluar"
-                href=""
-                icon={ArrowRightStartOnRectangleIcon}
-              >
-                Keluar
-              </SidebarMenuItem>,
-            ]}
-          />
-        </nav>
-      </div>
+        <SidebarHeader />
+        <div
+          className={clsx(
+            'flex flex-col gap-4',
+            'flex-1',
+            'w-full h-dvh',
+            'px-3.5 pb-4',
+            'overflow-y-scroll',
+          )}
+        >
+          <nav className={clsx('flex-1 h-auto')}>
+            <SidebarMenu
+              items={[
+                <SidebarMenuItem
+                  key="ajukan-sertifikasi"
+                  href=""
+                  icon={DocumentTextIcon}
+                  variants={{ type: 'hilite' }}
+                >
+                  Ajukan Sertifikasi
+                </SidebarMenuItem>,
+                <SidebarMenuItem key="beranda" href="" icon={HomeIcon}>
+                  Beranda
+                </SidebarMenuItem>,
+                <SidebarMenuItem key="pembayaran" href="" icon={CreditCardIcon}>
+                  Pembayaran
+                </SidebarMenuItem>,
+                <SidebarMenuItem
+                  key="proses-sertifikasi"
+                  href="/"
+                  icon={CheckBadgeIcon}
+                >
+                  Proses Sertifikasi
+                </SidebarMenuItem>,
+                <SidebarMenuItem
+                  key="bantuan"
+                  href=""
+                  icon={QuestionMarkCircleIcon}
+                >
+                  Bantuan
+                </SidebarMenuItem>,
+                // TEST:
+                ...Array(0)
+                  .fill(null)
+                  .map((_, index) => (
+                    <SidebarMenuItem
+                      key={'test' + index}
+                      href=""
+                      icon={QuestionMarkCircleIcon}
+                    >
+                      TEST {index}
+                    </SidebarMenuItem>
+                  )),
+              ]}
+            />
+          </nav>
+          <nav className={clsx('pt-4.5', 'border-t border-lineSecondary')}>
+            <SidebarMenu
+              items={[
+                <SidebarMenuItem
+                  key="pengaturan-profil"
+                  href=""
+                  icon={UserIcon}
+                >
+                  Pengaturan Profil
+                </SidebarMenuItem>,
+                <SidebarMenuItem
+                  key="keluar"
+                  href=""
+                  icon={ArrowRightStartOnRectangleIcon}
+                >
+                  Keluar
+                </SidebarMenuItem>,
+              ]}
+            />
+          </nav>
+        </div>
+      </aside>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Screen: React.FC<ScreenProps> = ({ subheader, children }) => {
   return (
     <div className={clsx('flex flex-row', 'h-full min-h-screen')}>
       <Sidebar />
-      <div className={clsx('w-full')}>
+      <div className={clsx('w-full flex-1 overflow-scroll')}>
         <Header />
         <SubHeader
           icon={subheader.icon}

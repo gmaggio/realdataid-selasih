@@ -6,6 +6,7 @@ import { tv, type VariantProps } from 'tailwind-variants';
 export const buttonVariants = tv({
   base: clsx(
     'flex flex-row gap-2.5 item-center justify-center',
+    'self-center',
     'font-bold',
     'rounded-button',
     'hover:opacity-60',
