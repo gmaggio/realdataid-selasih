@@ -3,107 +3,31 @@ import Button from '@/shared/components/Button';
 import IconButton from '@/shared/components/IconButton';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import { HTMLAttributes } from 'react';
+import React from 'react';
+
+export interface TableColumnProps {
+  header: string;
+  accessor: string;
+}
 
 export interface TableProps {
   header?: TableHeaderProps;
+  columns: TableColumnProps[];
+  data: any[];
+  dataBuilder: (
+    column: TableColumnProps,
+    rowData: any,
+    rowIndex: number,
+    defaultData: string | number | React.ReactNode,
+  ) => string | number | React.ReactNode;
 }
 
-const Table: React.FC<TableProps> = ({ header }) => {
-  const columns = [
-    {
-      header: 'Lini Bisins',
-      accessor: 'lini_produksi',
-    },
-    {
-      header: 'Nama Bahan Baku',
-      accessor: 'nama',
-    },
-    {
-      header: 'Tipe Bahan Baku',
-      accessor: 'tipe_bahan_baku',
-    },
-    {
-      header: 'Jenis Bahan Baku',
-      accessor: 'jenis_bahan_baku',
-    },
-    {
-      header: 'Asal Bahan Baku',
-      accessor: 'asal_bahan_baku',
-    },
-    {
-      header: 'Total Penggunaan',
-      accessor: 'total_penggunaan',
-    },
-    {
-      header: '',
-      accessor: 'actions',
-    },
-  ];
-
-  const data: BahanBakuMainData[] = [
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-  ];
-
+const Table: React.FC<TableProps> = ({
+  header,
+  columns,
+  data,
+  dataBuilder,
+}) => {
   return (
     <div className={clsx('flex flex-col gap-4.5', 'w-full pt-2.5 pb-5')}>
       {header && <TableHeader {...header} />}
@@ -144,33 +68,16 @@ const Table: React.FC<TableProps> = ({ header }) => {
         <tbody>
           {data.map((row, rowIndex) => (
             <tr key={rowIndex}>
-              {columns.map((column) => {
-                if (column.accessor === 'total_penggunaan') {
-                  return (
-                    <td key={column.accessor}>
-                      <div className={clsx('flex gap-3 justify-between')}>
-                        <span>{row[column.accessor]}</span>
-                        <span className={clsx('font-bold')}>{row.satuan}</span>
-                      </div>
-                    </td>
-                  );
-                }
-
-                if (column.accessor === 'actions') {
-                  return (
-                    <td key={column.accessor}>
-                      <div className={clsx('flex justify-center gap-2')}>
-                        <IconButton icon={TrashIcon} />
-                        <IconButton icon={PencilIcon} />
-                      </div>
-                    </td>
-                  );
-                }
-
-                return (
-                  <td key={column.accessor}>{(row as any)[column.accessor]}</td>
-                );
-              })}
+              {columns.map((column) => (
+                <td key={column.accessor}>
+                  {dataBuilder(
+                    column,
+                    row,
+                    rowIndex,
+                    (row as any)[column.accessor],
+                  )}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>

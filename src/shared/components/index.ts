@@ -18,5 +18,5 @@ export { default as Sidebar } from './Sidebar';
 export { default as SubHeader } from './SubHeader';
 export type { SubHeaderProps } from './SubHeader';
 export { default as Table } from './Table';
-export type { TableProps, TableHeaderProps } from './Table';
+export type { TableColumnProps, TableProps, TableHeaderProps } from './Table';
 export { default as Tabs } from './Tabs';

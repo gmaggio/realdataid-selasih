@@ -1,20 +1,11 @@
 import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
-import TakeCertificationForm from '@/app/take-certification/components/TakeCertificationForm';
-import {
-  CategoryTabs,
-  IconButton,
-  Layer,
-  Table,
-  Tabs,
-} from '@/shared/components';
+import TakeCertificationTables from '@/app/take-certification/components/TakeCertificationTables';
+import { CategoryTabs, Layer, Tabs } from '@/shared/components';
 import LayerHeader from '@/shared/components/Layer/LayerHeader';
-import { BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React from 'react';
 
 const TakeCertificationContent: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <Layer>
       <LayerHeader title="Formulir Persyaratan Teknis" />
@@ -40,27 +31,7 @@ const TakeCertificationContent: React.FC = () => {
         ]}
       />
 
-      <div className={clsx('flex flex-col gap-1')}>
-        <Table
-          header={{
-            title: 'Bahan baku utama',
-            description:
-              'Semua bahan baku utama yang diperlukan agar produk dapat diproduksi (Periode 12 bulan terakhir).',
-            onAdd: () => setShowModal(true),
-            required: true,
-          }}
-        />
-
-        <Table
-          header={{
-            title: 'Bahan baku utama',
-            description:
-              'Semua bahan baku utama yang diperlukan agar produk dapat diproduksi (Periode 12 bulan terakhir).',
-            onAdd: () => setShowModal(true),
-            required: true,
-          }}
-        />
-      </div>
+      <TakeCertificationTables />
 
       <TakeCertificationFooter
         classClass={clsx('px-7.5!')}
@@ -68,19 +39,6 @@ const TakeCertificationContent: React.FC = () => {
         onSaveDraft={() => console.log('save draft')}
         onNext={() => console.log('next')}
       />
-
-      {/* Form Modal Window */}
-      <TakeCertificationForm
-        id="form-modal"
-        open={showModal}
-        onClose={() => setShowModal(false)}
-      >
-        <IconButton
-          icon={BellIcon}
-          onClick={() => setShowModal(false)}
-          aria-label="Close form modal"
-        />
-      </TakeCertificationForm>
     </Layer>
   );
 };
