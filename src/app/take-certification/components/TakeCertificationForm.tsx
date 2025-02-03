@@ -4,6 +4,10 @@ import { useFormSelections } from '@/app/take-certification/hooks/useFormSelecti
 import { useID } from '@/app/take-certification/hooks/useIdContext';
 import { BahanBakuData } from '@/app/take-certification/models/types';
 import {
+  createBahanBaku,
+  editBahanBaku,
+} from '@/app/take-certification/services/BahanBakuService';
+import {
   CategoryTabs,
   Input,
   Modal,
@@ -103,6 +107,27 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
           0,
         )
     : 0;
+
+  const handleSubmit = async () => {
+    if (!data) return;
+
+    try {
+      if (kodeBahanBaku === null) {
+        await createBahanBaku(data);
+        console.log('✅ New Bahan Baku created successfully!');
+      } else {
+        await editBahanBaku(data);
+        console.log('✅ Bahan Baku updated successfully!');
+      }
+
+      onClose();
+    } catch (error) {
+      console.error('❌ Failed to submit Bahan Baku:', error);
+      setError(
+        error instanceof Error ? error.message : 'Failed to submit data.',
+      );
+    }
+  };
 
   const units = [
     { value: 'Ton', label: 'Ton' },
@@ -392,8 +417,8 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
       <TakeCertificationFooter
         classClass={clsx('px-3.5! py-2.5')}
         onCancel={onClose}
-        onSaveDraft={() => console.log('save draft')}
-        onNext={() => console.log('next')}
+        onSaveDraft={handleSubmit}
+        onNext={handleSubmit}
       />
     </Modal>
   );

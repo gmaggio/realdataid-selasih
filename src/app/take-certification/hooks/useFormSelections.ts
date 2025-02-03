@@ -7,7 +7,7 @@ import { SelectItemData } from "@/app/take-certification/models/types";
 export const useFormSelections = (uuidTransaksi: string) => {
   const [liniProduksi, setLiniProduksi] = useState<SelectItemData[]>([]);
 
-  // TODO:
+  // TODO: enable "satuan" data handling (uncomment)
   // const [satuan, setSatuan] = useState<SelectItemData[]>([]);
 
   const [isLoading, setIsLoading] = useState(true);

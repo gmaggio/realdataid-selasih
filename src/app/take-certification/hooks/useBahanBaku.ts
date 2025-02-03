@@ -39,7 +39,6 @@ export const useBahanBakuDetail = (kodeBahanBaku: string | null) => useAsyncData
   },
   fetchFunction: () => getBahanBakuDetail(kodeBahanBaku ?? ''),
   dependencies: [kodeBahanBaku],
-  entityName: 'detail',
   preFetch: () => {
     if (!kodeBahanBaku) return false;
   },

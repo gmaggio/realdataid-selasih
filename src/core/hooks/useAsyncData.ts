@@ -4,7 +4,6 @@ interface UseAsyncDataParams<T> {
   initialValue: T;
   fetchFunction: () => Promise<T>;
   dependencies: any[];
-  entityName?: string;
   preFetch?: () => boolean | void;
 }
 
@@ -12,7 +11,6 @@ export const useAsyncData = <T>({
   initialValue,
   fetchFunction,
   dependencies = [],
-  entityName,
   preFetch,
 }: UseAsyncDataParams<T>) => {
   const [data, setData] = useState<T>(initialValue);
@@ -28,10 +26,8 @@ export const useAsyncData = <T>({
       const result = await fetchFunction();
       setData(result);
     } catch (err) {
-      const message = `Failed to fetch ${entityName && 'data'}: ` +
-        `${(err instanceof Error ? (": " + err.message) : '.')}`;
-      console.error("⚠️ " + message);
-      setError(message);
+      console.error("Hook Error:", err);
+      setError(err instanceof Error ? err.message : "Failed to fetch data");
     } finally {
       setIsLoading(false);
     }
