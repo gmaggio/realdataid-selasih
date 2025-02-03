@@ -1,7 +1,6 @@
 import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
 import { useBahanBakuDetail } from '@/app/take-certification/hooks/useBahanBaku';
 import { useID } from '@/app/take-certification/hooks/useIdContext';
-import { BahanBakuData } from '@/app/take-certification/models/types';
 import {
   CategoryTabs,
   Input,
@@ -28,7 +27,23 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 }) => {
   const { getMockBahanBakuDetail } = useID();
 
-  const [unit, setUnit] = useState(1);
+  const [unit, setUnit] = useState<string>('Ton');
+  const [penggunaan, setPenggunaan] = useState<string[]>(
+    Array.from({ length: 12 }, () => '0'),
+  );
+
+  // Handle Penggunaan
+  const handlePenggunaan = (index: number, value: string) => {
+    const update = [...penggunaan];
+    update[index] = value;
+    setPenggunaan(update);
+  };
+
+  // Compute the sum of Penggunaan
+  const totalPenggunaan = penggunaan.reduce(
+    (acc, value) => acc + parseFloat(value || '0'),
+    0,
+  );
 
   // Detect mocked data
   let kodeData = kodeBahanBaku;
@@ -48,10 +63,30 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
     }
   }, [kodeBahanBaku]);
 
+  useEffect(() => {
+    if (data) {
+      setUnit(data.satuan);
+      setPenggunaan([
+        data.bulan_1,
+        data.bulan_2,
+        data.bulan_3,
+        data.bulan_4,
+        data.bulan_5,
+        data.bulan_6,
+        data.bulan_7,
+        data.bulan_8,
+        data.bulan_9,
+        data.bulan_10,
+        data.bulan_11,
+        data.bulan_12,
+      ]);
+    }
+  }, [data]);
+
   const units = [
-    { value: '1', label: 'Ton' },
-    { value: '2', label: 'Kg' },
-    { value: '3', label: 'Liter' },
+    { value: 'Ton', label: 'Ton' },
+    { value: 'Kg', label: 'Kg' },
+    { value: 'Liter', label: 'Liter' },
   ];
 
   return (
@@ -134,9 +169,9 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
             name="lini_produksi"
             value={data?.lini_produksi}
             options={[
-              { value: '1', label: 'Besi' },
-              { value: '2', label: 'Kayu' },
-              { value: '3', label: 'Tanah' },
+              { value: 'Besi', label: 'Besi' },
+              { value: 'Kayu', label: 'Kayu' },
+              { value: 'Tanah', label: 'Tanah' },
             ]}
           />
         </div>
@@ -163,7 +198,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
             name="satuan"
             options={units}
             value={data?.satuan}
-            onChange={(e) => setUnit(Number(e.target.value))}
+            onChange={(e) => setUnit(e.target.value)}
           />
         </div>
 
@@ -173,8 +208,8 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
             id="jenis_bahan_baku"
             name="jenis_bahan_baku"
             options={[
-              { value: '1', label: 'Daur Ulang' },
-              { value: '2', label: 'Non Daur Ulang' },
+              { value: 'Daur Ulang', label: 'Daur Ulang' },
+              { value: 'Non Daur Ulang', label: 'Non Daur Ulang' },
             ]}
             value={data?.jenis_bahan_baku}
           />
@@ -186,8 +221,8 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
             id="asal_bahan_baku"
             name="asal_bahan_baku"
             options={[
-              { value: '1', label: 'Impor' },
-              { value: '2', label: 'Ekspor' },
+              { value: 'Impor', label: 'Impor' },
+              { value: 'Ekspor', label: 'Ekspor' },
             ]}
             value={data?.asal_bahan_baku}
           />
@@ -256,11 +291,8 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
                               }
                             </span>
                           }
-                          value={
-                            data?.[
-                              `bulan_${i}` as keyof BahanBakuData
-                            ] as string
-                          }
+                          value={penggunaan[i]}
+                          onChange={(e) => handlePenggunaan(i, e.target.value)}
                         />
                       </div>,
                     );
@@ -277,7 +309,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
               <span
                 className={twMerge('inputLayout', clsx('justify-end', 'px-0'))}
               >
-                50.489
+                {totalPenggunaan}
               </span>
             </div>
           </div>
