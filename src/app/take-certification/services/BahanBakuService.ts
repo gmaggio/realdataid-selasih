@@ -1,6 +1,6 @@
 import { BahanBakuData, BahanBakuID, BahanBakuMainData, SelectItemData } from '@/app/take-certification/models/types';
 import axios from 'axios';
-import { fetchBahanBaku, fetchBahanBakuDetail, fetchBahanBakuSatuan, fetchLiniProduksi, postBahanBaku, updateBahanBaku } from './api';
+import { deleteBahanBaku, fetchBahanBaku, fetchBahanBakuDetail, fetchBahanBakuSatuan, fetchLiniProduksi, postBahanBaku, updateBahanBaku } from './api';
 import { handleServiceError } from '@/core/services/errorHandler';
 
 export const getBahanBakuData = async (uuidTransaksi: string): Promise<BahanBakuMainData[]> => {
@@ -40,6 +40,15 @@ export const editBahanBaku = async (data: BahanBakuData): Promise<BahanBakuID | 
   } catch (error) {
     handleServiceError(error, 'edit Bahan Baku');
     return null;
+  }
+};
+
+export const removeBahanBaku = async (kode: string, uuidUser: string) => {
+  try {
+    await deleteBahanBaku(kode, uuidUser);
+    console.log("✅ Bahan Baku deleted successfully!");
+  } catch (error) {
+    handleServiceError(error);
   }
 };
 

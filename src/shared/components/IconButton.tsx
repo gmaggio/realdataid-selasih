@@ -11,6 +11,7 @@ export const IconButtonVariants = tv({
     'text-txtBody2',
     'hover:text-btnPrimary hover:bg-btnSecondary',
     'cursor-pointer',
+    'disabled:opacity-50 disabled:pointer-events-none',
   ),
   variants: {
     disabled: {

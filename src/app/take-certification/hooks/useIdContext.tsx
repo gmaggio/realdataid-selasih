@@ -43,7 +43,7 @@ const uuidUser = '00000000-0000-0000-0000-000123456789';
 
 const mockBahanBakuListBase: BahanBakuMainData[] = [
   {
-    kode: '00000000-0000-0000-0000-111111111111',
+    kode: '00000000-0000-0000-0000-000000000001',
     kode_transaksi_id: '00000000-0000-0000-0000-aaaaaaaaaaaa',
     kode_lini_produksi: '00000000-0000-0000-0000-bbbbbbbbbbbb',
     lini_produksi: 'Besi',
@@ -55,7 +55,7 @@ const mockBahanBakuListBase: BahanBakuMainData[] = [
     satuan: 'Ton',
   },
   {
-    kode: '00000000-0000-0000-0000-222222222222',
+    kode: '00000000-0000-0000-0000-000000000002',
     kode_transaksi_id: '00000000-0000-0000-0000-aaaaaaaaaaaa',
     kode_lini_produksi: '00000000-0000-0000-0000-cccccccccccc',
     lini_produksi: 'Kayu',
@@ -68,10 +68,19 @@ const mockBahanBakuListBase: BahanBakuMainData[] = [
   },
 ];
 
-const mockBahanBakuList = Array.from(
-  { length: 5 },
-  () => mockBahanBakuListBase,
-).flat();
+const mockBahanBakuList = Array.from({ length: 5 }, (_, index) => {
+  const formatNumber = (num: number) => num.toString().padStart(11, '0');
+  return [
+    {
+      ...mockBahanBakuListBase[0],
+      kode: `00000000-0000-0000-0000-${formatNumber(index * 2 + 1)}`,
+    },
+    {
+      ...mockBahanBakuListBase[1],
+      kode: `00000000-0000-0000-0000-${formatNumber(index * 2 + 2)}`,
+    },
+  ];
+}).flat();
 
 const getMockBahanBakuDetail = (id: string) => {
   const mainData = mockBahanBakuListBase.find((dat) => dat.kode === id);

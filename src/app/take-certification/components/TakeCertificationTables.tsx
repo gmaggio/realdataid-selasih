@@ -1,5 +1,8 @@
 import TakeCertificationForm from '@/app/take-certification/components/TakeCertificationForm';
-import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBaku';
+import {
+  useBahanBakuData,
+  useDeleteBahanBaku,
+} from '@/app/take-certification/hooks/useBahanBaku';
 import { useID } from '@/app/take-certification/hooks/useIdContext';
 import { BahanBakuMainData } from '@/app/take-certification/models/types';
 import { Button, IconButton, Table } from '@/shared/components';
@@ -14,10 +17,11 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 
 const TakeCertificationTables: React.FC = () => {
-  const { uuid_transaksi, mockBahanBakuList } = useID();
+  const { uuid_transaksi, uuid_user, mockBahanBakuList } = useID();
 
   const { data, setData, isLoading, error, setError, refetch } =
     useBahanBakuData(uuid_transaksi);
+  const { deleteItem, deletingRows, setDeletingRows } = useDeleteBahanBaku();
 
   const [showModal, setShowModal] = useState(false);
   const [selectedID, setSelectedID] = useState<string | null>(null);
@@ -118,13 +122,25 @@ const TakeCertificationTables: React.FC = () => {
             if (column.accessor === 'actions') {
               return (
                 <div className={clsx('flex justify-center gap-2')}>
-                  <IconButton icon={TrashIcon} />
                   <IconButton
+                    className={clsx(
+                      deletingRows[rowData.kode] && 'animate-spin',
+                    )}
+                    data-type={'item-delete'}
+                    icon={
+                      deletingRows[rowData.kode] ? ArrowPathIcon : TrashIcon
+                    }
+                    onClick={() => deleteItem(rowData.kode, uuid_user, refetch)}
+                    disabled={deletingRows[rowData.kode]}
+                  />
+                  <IconButton
+                    data-type={'item-edit'}
                     icon={PencilIcon}
                     onClick={() => {
                       setShowModal(true);
                       setSelectedID(rowData.kode);
                     }}
+                    disabled={deletingRows[rowData.kode]}
                   />
                 </div>
               );
