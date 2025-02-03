@@ -28,21 +28,26 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   onClose,
   ...rest
 }) => {
-  const { uuid_transaksi, getMockBahanBakuDetail } = useID();
+  const { uuid_transaksi, getMockBahanBakuDetail, mockLiniProduksiOptions } =
+    useID();
 
   const [unit, setUnit] = useState<string>('Ton');
 
-  // Detect mocked data
-  let kodeData = kodeBahanBaku;
-  const isMocked = kodeBahanBaku?.startsWith('00000000');
-  if (isMocked) kodeData = null;
-
   const {
-    liniProduksi,
+    liniProduksi: liniProduksiData,
     // satuan,
     isLoading: isLoadingSelections,
     error: selectionError,
   } = useFormSelections(uuid_transaksi);
+
+  // Detect mocked data
+  let kodeData = kodeBahanBaku;
+  let liniProduksi = liniProduksiData;
+  const isMocked = kodeBahanBaku?.startsWith('00000000');
+  if (isMocked) {
+    kodeData = null;
+    liniProduksi = mockLiniProduksiOptions;
+  }
 
   const { data, setData, isLoading, setIsLoading, error, setError, refetch } =
     useBahanBakuDetail(open && kodeData ? kodeData : null);
@@ -180,13 +185,11 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
         )}
       >
         <div>
-          <label htmlFor="lini_produksi">
-            Lini Produksi {liniProduksi.length}
-          </label>
+          <label htmlFor="lini_produksi">Lini Produksi</label>
           <Select
             id="lini_produksi"
             name="lini_produksi"
-            value={data?.lini_produksi ?? ''}
+            value={data?.kode_lini_produksi ?? ''}
             options={liniProduksi.map((item) => ({
               value: item.kode,
               label: item.nama,

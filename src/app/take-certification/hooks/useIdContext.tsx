@@ -1,6 +1,7 @@
 import {
   BahanBakuData,
   BahanBakuMainData,
+  SelectItemData,
 } from '@/app/take-certification/models/types';
 import { createContext, useContext, ReactNode } from 'react';
 
@@ -8,6 +9,7 @@ interface IDContextProps {
   uuid_transaksi: string;
   uuid_user: string;
   mockBahanBakuList: BahanBakuMainData[];
+  mockLiniProduksiOptions: SelectItemData[];
   getMockBahanBakuDetail: (id: string) => BahanBakuData;
 }
 
@@ -19,6 +21,7 @@ export const IDProvider = ({ children }: { children: ReactNode }) => {
     uuid_transaksi: uuidTransaksi,
     uuid_user: uuidUser,
     mockBahanBakuList: mockBahanBakuList,
+    mockLiniProduksiOptions: mockLiniProduksiOptions,
     getMockBahanBakuDetail: getMockBahanBakuDetail,
   };
 
@@ -54,7 +57,7 @@ const mockBahanBakuListBase: BahanBakuMainData[] = [
   {
     kode: '00000000-0000-0000-0000-222222222222',
     kode_transaksi_id: '00000000-0000-0000-0000-aaaaaaaaaaaa',
-    kode_lini_produksi: '00000000-0000-0000-0000-bbbbbbbbbbbb',
+    kode_lini_produksi: '00000000-0000-0000-0000-cccccccccccc',
     lini_produksi: 'Kayu',
     nama: 'Amonia',
     tipe_bahan_baku: 'Amonia 10%',
@@ -93,3 +96,9 @@ const getMockBahanBakuDetail = (id: string) => {
     uuid_user: '00000000-0000-0000-0000-xxxxxxxxxxxx',
   };
 };
+
+const mockLiniProduksiOptions: SelectItemData[] = [
+  { kode: '00000000-0000-0000-0000-bbbbbbbbbbbb', nama: 'Besi' },
+  { kode: '00000000-0000-0000-0000-cccccccccccc', nama: 'Kayu' },
+  { kode: '00000000-0000-0000-0000-dddddddddddd', nama: 'Tanah' },
+];
