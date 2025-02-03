@@ -30,7 +30,7 @@ export const useFormSelections = (uuidTransaksi: string) => {
         setLiniProduksi(liniData);
         // setSatuan(satuanData);
       } catch (err) {
-        console.error("⚠️ Failed to fetch form selections", err);
+        console.error("⚠️ Failed to fetch form selections:", err);
         setError(err instanceof Error ? err.message : "Failed to fetch form selections");
       } finally {
         setIsLoading(false);

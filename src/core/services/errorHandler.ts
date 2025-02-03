@@ -12,11 +12,3 @@ export const handleServiceError = (error: unknown, description?: string) => {
     throw new Error("An unexpected error occurred.");
   }
 };
-
-export const handleAsyncError = (error: unknown, message?: string): string => {
-  const errorMessage = (message !== undefined ? (message + ': \n') : '') +
-    (error instanceof Error && (error.message));
-
-  console.error("⚠️ " + errorMessage);
-  return errorMessage;
-};

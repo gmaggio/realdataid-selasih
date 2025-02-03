@@ -35,6 +35,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   const { uuid_transaksi, getMockBahanBakuDetail, mockLiniProduksiOptions } =
     useID();
 
+  const [originalData, setOriginalData] = useState<BahanBakuData | null>(null);
   const [unit, setUnit] = useState<string>('Ton');
 
   const {
@@ -58,37 +59,11 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 
   useEffect(() => {
     if (kodeBahanBaku === null) {
-      // ✅
-      setUnit('Ton');
-      setData({
-        kode: '',
-        kode_lini_produksi: '',
-        lini_produksi: '',
-        nama: '',
-        tipe_bahan_baku: '',
-        satuan: '',
-        jenis_bahan_baku: '',
-        asal_bahan_baku: '',
-        addition: [],
-        bulan_1: '',
-        bulan_2: '',
-        bulan_3: '',
-        bulan_4: '',
-        bulan_5: '',
-        bulan_6: '',
-        bulan_7: '',
-        bulan_8: '',
-        bulan_9: '',
-        bulan_10: '',
-        bulan_11: '',
-        bulan_12: '',
-        total_penggunaan: '',
-        kode_transaksi_id: '',
-        uuid_user: '',
-      });
+      reset();
     } else if (isMocked) {
       const mockData = getMockBahanBakuDetail(kodeBahanBaku!);
       setData(mockData);
+      setOriginalData(mockData);
       setUnit(mockData.satuan);
       setIsLoading(false);
       setError(null);
@@ -120,13 +95,58 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
         console.log('✅ Bahan Baku updated successfully!');
       }
 
-      onClose();
+      handleClose();
     } catch (error) {
       console.error('❌ Failed to submit Bahan Baku:', error);
       setError(
         error instanceof Error ? error.message : 'Failed to submit data.',
       );
     }
+  };
+
+  const handleClose = () => {
+    if (originalData) {
+      setData(originalData);
+      setUnit(originalData.satuan);
+      setIsLoading(false);
+      setError(null);
+    }
+    onClose();
+  };
+
+  const reset = () => {
+    const defaultData = {
+      kode: '',
+      kode_lini_produksi: '',
+      lini_produksi: '',
+      nama: '',
+      tipe_bahan_baku: '',
+      satuan: 'Ton',
+      jenis_bahan_baku: '',
+      asal_bahan_baku: '',
+      addition: [],
+      bulan_1: '',
+      bulan_2: '',
+      bulan_3: '',
+      bulan_4: '',
+      bulan_5: '',
+      bulan_6: '',
+      bulan_7: '',
+      bulan_8: '',
+      bulan_9: '',
+      bulan_10: '',
+      bulan_11: '',
+      bulan_12: '',
+      total_penggunaan: '',
+      kode_transaksi_id: '',
+      uuid_user: '',
+    };
+
+    setData(defaultData);
+    setOriginalData(defaultData);
+    setUnit('Ton');
+    setIsLoading(false);
+    setError(null);
   };
 
   const units = [
@@ -143,7 +163,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
       }}
       hasCloseButton
       open={open}
-      onClose={onClose}
+      onClose={handleClose}
       {...rest}
     >
       {(() => {
@@ -416,7 +436,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 
       <TakeCertificationFooter
         classClass={clsx('px-3.5! py-2.5')}
-        onCancel={onClose}
+        onCancel={handleClose}
         onSaveDraft={handleSubmit}
         onNext={handleSubmit}
       />
