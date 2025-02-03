@@ -25,7 +25,7 @@ const Input: React.FC<InputProps> = ({
 
           // Disabled
           'has-[input:disabled]:border-linePrimary/50',
-          'has-[input:disabled]:bg-surfaceInactive',
+          'has-[input:disabled]:bg-surfaceInactive/50',
           'has-[input:disabled]:text-txtBody2',
 
           // Invalid
@@ -41,7 +41,7 @@ const Input: React.FC<InputProps> = ({
           clsx(
             'w-full',
 
-            // Remove spin-button
+            // Remove spinner-button
             '[appearance:textfield]',
           ),
           className,

@@ -93,7 +93,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
     }
   }, [kodeBahanBaku, isMocked]);
 
-  // Compute the sum of Penggunaan
+  // Get total Penggunaan
   const totalPenggunaan = data
     ? Object.keys(data)
         .filter((key) => key.startsWith('bulan_'))
@@ -122,7 +122,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
       {...rest}
     >
       {(() => {
-        if (isLoading)
+        if (isLoading || isLoadingSelections)
           return (
             <div
               className={clsx(
@@ -140,7 +140,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
             </div>
           );
 
-        if (error)
+        if (error || selectionError)
           return (
             <div
               className={clsx(

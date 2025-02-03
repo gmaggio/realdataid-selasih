@@ -18,6 +18,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   return (
     <select
+      disabled={options.length === 0}
       className={twMerge(
         'inputBox',
         clsx(
@@ -28,6 +29,11 @@ const Select: React.FC<SelectProps> = ({
           'bg-no-repeat',
           'bg-[position:right_.875rem_center]',
           'bg-[size:.75rem_.75rem]',
+
+          // Disabled
+          'disabled:border-linePrimary/50',
+          'disabled:bg-surfaceInactive/50',
+          'disabled:text-txtBody2',
         ),
         className,
       )}
