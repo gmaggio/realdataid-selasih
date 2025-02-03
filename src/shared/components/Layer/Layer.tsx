@@ -12,6 +12,7 @@ const Layer: React.FC<LayerProps> = ({ children, className }) => {
         clsx(
           'flex flex-col',
           'w-full min-h-8',
+          'overflow-hidden',
           'bg-surfacePrimary',
           'border border-lineSecondary rounded-xl',
           '*:px-4.5',

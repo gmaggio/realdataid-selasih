@@ -1,4 +1,5 @@
 import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
+import { useBahanBakuDetail } from '@/app/take-certification/hooks/useBahanBaku';
 import {
   CategoryTabs,
   Input,
@@ -6,16 +7,27 @@ import {
   ModalProps,
   Select,
 } from '@/shared/components';
+import {
+  ArrowPathIcon,
+  ExclamationTriangleIcon,
+} from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export type TakeCertificationFormProps = ModalProps;
+export type TakeCertificationFormProps = ModalProps & {
+  kodeBahanBaku: string | null;
+};
 
 const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
+  kodeBahanBaku,
+  open,
   ...rest
 }) => {
   const [unit, setUnit] = useState(1);
+
+  const { data, setData, isLoading, error, setError, refetch } =
+    useBahanBakuDetail(open && kodeBahanBaku ? kodeBahanBaku : null);
 
   const units = [
     { value: '1', label: 'Ton' },
@@ -26,12 +38,56 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   return (
     <Modal
       modalClass={clsx('w-[36rem] max-w-[36rem]')}
-      {...rest}
       header={{
         title: 'Tambah Bahan Baku Utama',
       }}
       hasCloseButton
+      open={open}
+      {...rest}
     >
+      {(() => {
+        if (isLoading)
+          return (
+            <div
+              className={clsx(
+                'absolute z-500',
+                'flex items-center justify-center',
+                'w-full h-full p-18',
+                'bg-[white]/80',
+                'text-txtBody2/70',
+              )}
+            >
+              <ArrowPathIcon
+                className={clsx('size-6 animate-spin', 'mr-2.5')}
+              />
+              <p>Loading Bahan Baku detail...</p>
+            </div>
+          );
+
+        if (error)
+          return (
+            <div
+              className={clsx(
+                'absolute z-500',
+                'flex flex-col gap-4 items-center justify-center',
+                'w-full h-full p-18',
+                'bg-[white]/80',
+                'text-semanticImportant text-xl',
+              )}
+            >
+              <div
+                className={clsx(
+                  'flex items-center justify-center',
+                  'text-semanticImportant text-xl',
+                )}
+              >
+                <ExclamationTriangleIcon className={clsx('size-6', 'mr-2.5')} />
+                <p>{error}</p>
+              </div>
+            </div>
+          );
+      })()}
+
       <CategoryTabs
         items={[
           { label: 'Pengisian Data', href: '/' },

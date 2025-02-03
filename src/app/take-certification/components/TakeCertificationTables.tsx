@@ -1,5 +1,5 @@
 import TakeCertificationForm from '@/app/take-certification/components/TakeCertificationForm';
-import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBakuData';
+import { useBahanBakuData } from '@/app/take-certification/hooks/useBahanBaku';
 import { useID } from '@/app/take-certification/hooks/useIdContext';
 import { BahanBakuMainData } from '@/app/take-certification/models/types';
 import { Button, IconButton, Table } from '@/shared/components';
@@ -20,6 +20,7 @@ const TakeCertificationTables: React.FC = () => {
     useBahanBakuData(uuid_transaksi);
 
   const [showModal, setShowModal] = useState(false);
+  const [selectedID, setSelectedID] = useState<string | null>(null);
 
   const columns = [
     { header: 'Lini Bisins', accessor: 'lini_produksi' },
@@ -97,7 +98,10 @@ const TakeCertificationTables: React.FC = () => {
             title: 'Bahan baku utama',
             description:
               'Semua bahan baku utama yang diperlukan agar produk dapat diproduksi (Periode 12 bulan terakhir).',
-            onAdd: () => setShowModal(true),
+            onAdd: () => {
+              setShowModal(true);
+              setSelectedID(null);
+            },
             required: true,
           }}
           columns={columns}
@@ -116,7 +120,13 @@ const TakeCertificationTables: React.FC = () => {
               return (
                 <div className={clsx('flex justify-center gap-2')}>
                   <IconButton icon={TrashIcon} />
-                  <IconButton icon={PencilIcon} />
+                  <IconButton
+                    icon={PencilIcon}
+                    onClick={() => {
+                      setShowModal(true);
+                      setSelectedID(rowData.kode);
+                    }}
+                  />
                 </div>
               );
             }
@@ -131,6 +141,7 @@ const TakeCertificationTables: React.FC = () => {
         id="form-modal"
         open={showModal}
         onClose={() => setShowModal(false)}
+        kodeBahanBaku={selectedID}
       >
         <IconButton
           icon={BellIcon}

@@ -33,7 +33,11 @@ export interface BahanBakuAddition {
   nama: string;
 }
 
-export interface LiniProduksiData {
+export interface BahanBakuID {
+  kode_bahan_baku: string;
+}
+
+export interface SelectItemData {
   kode: string;
   nama: string;
 }

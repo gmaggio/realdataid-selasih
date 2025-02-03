@@ -1,6 +1,6 @@
-import { BahanBakuMainData } from '@/app/take-certification/models/types';
+import { BahanBakuData, BahanBakuMainData } from '@/app/take-certification/models/types';
 import axios from 'axios';
-import { fetchBahanBaku } from './api';
+import { fetchBahanBaku, fetchBahanBakuDetail } from './api';
 
 export const getBahanBakuData = async (uuidTransaksi: string): Promise<BahanBakuMainData[]> => {
   try {
@@ -15,5 +15,15 @@ export const getBahanBakuData = async (uuidTransaksi: string): Promise<BahanBaku
       console.error("Unexpected error:", error);
       throw new Error("An unexpected error occurred.");
     }
+  }
+};
+
+export const getBahanBakuDetail = async (kodeBahanBaku: string): Promise<BahanBakuData> => {
+  try {
+    const response = await fetchBahanBakuDetail(kodeBahanBaku);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch Bahan Baku detail:", error);
+    throw error;
   }
 };
