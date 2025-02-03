@@ -141,6 +141,7 @@ const TakeCertificationTables: React.FC = () => {
         open={showModal}
         onClose={() => setShowModal(false)}
         kodeBahanBaku={selectedID}
+        onSuccess={refetch}
       >
         <IconButton
           icon={BellIcon}

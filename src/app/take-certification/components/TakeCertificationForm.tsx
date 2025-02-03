@@ -2,7 +2,10 @@ import TakeCertificationFooter from '@/app/take-certification/components/TakeCer
 import { useBahanBakuDetail } from '@/app/take-certification/hooks/useBahanBaku';
 import { useFormSelections } from '@/app/take-certification/hooks/useFormSelections';
 import { useID } from '@/app/take-certification/hooks/useIdContext';
-import { BahanBakuData } from '@/app/take-certification/models/types';
+import {
+  BahanBakuData,
+  BahanBakuID,
+} from '@/app/take-certification/models/types';
 import {
   createBahanBaku,
   editBahanBaku,
@@ -24,12 +27,14 @@ import { twMerge } from 'tailwind-merge';
 
 export type TakeCertificationFormProps = ModalProps & {
   kodeBahanBaku: string | null;
+  onSuccess: () => void;
 };
 
 const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   kodeBahanBaku,
   open,
   onClose,
+  onSuccess,
   ...rest
 }) => {
   const { uuid_transaksi, getMockBahanBakuDetail, mockLiniProduksiOptions } =
@@ -42,7 +47,9 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
     liniProduksi: liniProduksiData,
     // satuan,
     isLoading: isLoadingSelections,
+    setIsLoading: setIsLoadingSelections,
     error: selectionError,
+    setError: setSelectionsError,
   } = useFormSelections(uuid_transaksi);
 
   // Detect mocked data
@@ -95,6 +102,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
         console.log('✅ Bahan Baku updated successfully!');
       }
 
+      onSuccess();
       handleClose();
     } catch (error) {
       console.error('❌ Failed to submit Bahan Baku:', error);
@@ -105,6 +113,8 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   };
 
   const handleClose = () => {
+    if (isLoading) return;
+
     if (originalData) {
       setData(originalData);
       setUnit(originalData.satuan);
@@ -203,7 +213,8 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
                 )}
               >
                 <ExclamationTriangleIcon className={clsx('size-6', 'mr-2.5')} />
-                <p>{error}</p>
+                {error && <p>{error}</p>}
+                {selectionError && <p>{selectionError}</p>}
               </div>
             </div>
           );

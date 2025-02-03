@@ -44,6 +44,8 @@ export const useFormSelections = (uuidTransaksi: string) => {
     liniProduksi,
     // satuan,
     isLoading,
-    error
+    setIsLoading,
+    error,
+    setError,
   };
 };
