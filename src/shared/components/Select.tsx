@@ -21,6 +21,8 @@ const Select: React.FC<SelectProps> = ({
       className={twMerge(
         'inputBox',
         clsx(
+          'hover:cursor-pointer',
+
           // Appearance
           'appearance-none',
           'bg-no-repeat',

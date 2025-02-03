@@ -2,40 +2,16 @@
 
 import { BahanBakuData, BahanBakuMainData } from '@/app/take-certification/models/types';
 import { getBahanBakuData, getBahanBakuDetail } from '@/app/take-certification/services/BahanBakuService';
-import { useEffect, useState } from 'react';
+import { useAsyncData } from '@/core/hooks/useAsyncData';
 
-export const useBahanBakuData = (uuidTransaksi: string) => {
-  const [data, setData] = useState<BahanBakuMainData[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+export const useBahanBakuData = (uuidTransaksi: string) => useAsyncData<BahanBakuMainData[]>({
+  initialValue: [],
+  fetchFunction: () => getBahanBakuData(uuidTransaksi),
+  dependencies: [uuidTransaksi],
+});
 
-  const fetchData = async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const result = await getBahanBakuData(uuidTransaksi);
-      setData(result);
-    } catch (err) {
-      console.error('⚠️ Failed to fetch data:', err);
-      setError(
-        "Failed to fetch data" +
-        (err instanceof Error ? (": " + err.message) : '.')
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [uuidTransaksi]);
-
-  return { data, setData, isLoading, error, setError, refetch: fetchData };
-};
-
-export const useBahanBakuDetail = (kodeBahanBaku: string | null) => {
-  const [data, setData] = useState<BahanBakuData | null>({
+export const useBahanBakuDetail = (kodeBahanBaku: string | null) => useAsyncData<BahanBakuData | null>({
+  initialValue: {
     kode: '',
     kode_lini_produksi: '',
     lini_produksi: '',
@@ -60,38 +36,11 @@ export const useBahanBakuDetail = (kodeBahanBaku: string | null) => {
     total_penggunaan: '',
     kode_transaksi_id: '',
     uuid_user: '',
-  });
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const result = await getBahanBakuDetail(kodeBahanBaku!);
-      setData(result);
-    } catch (err) {
-      console.error("⚠️ Failed to fetch detail:", err);
-      setError(
-        "Failed to fetch detail" +
-        (err instanceof Error ? (": " + err.message) : '.')
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!kodeBahanBaku) {
-      setIsLoading(false);
-      setError(null);
-      return;
-    }
-
-    fetchData();
-  }, [kodeBahanBaku]);
-
-  return { data, setData, isLoading, setIsLoading, error, setError, refetch: fetchData };
-};
+  },
+  fetchFunction: () => getBahanBakuDetail(kodeBahanBaku ?? ''),
+  dependencies: [kodeBahanBaku],
+  entityName: 'detail',
+  preFetch: () => {
+    if (!kodeBahanBaku) return false;
+  },
+});
