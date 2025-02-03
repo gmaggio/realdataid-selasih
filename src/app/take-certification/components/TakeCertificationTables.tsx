@@ -11,7 +11,7 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 const TakeCertificationTables: React.FC = () => {
   const { uuid_transaksi, mockBahanBakuList } = useID();
@@ -22,50 +22,14 @@ const TakeCertificationTables: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
   const columns = [
-    {
-      header: 'Lini Bisins',
-      accessor: 'lini_produksi',
-    },
-    {
-      header: 'Nama Bahan Baku',
-      accessor: 'nama',
-    },
-    {
-      header: 'Tipe Bahan Baku',
-      accessor: 'tipe_bahan_baku',
-    },
-    {
-      header: 'Jenis Bahan Baku',
-      accessor: 'jenis_bahan_baku',
-    },
-    {
-      header: 'Asal Bahan Baku',
-      accessor: 'asal_bahan_baku',
-    },
-    {
-      header: 'Total Penggunaan',
-      accessor: 'total_penggunaan',
-    },
-    {
-      header: '',
-      accessor: 'actions',
-    },
+    { header: 'Lini Bisins', accessor: 'lini_produksi' },
+    { header: 'Nama Bahan Baku', accessor: 'nama' },
+    { header: 'Tipe Bahan Baku', accessor: 'tipe_bahan_baku' },
+    { header: 'Jenis Bahan Baku', accessor: 'jenis_bahan_baku' },
+    { header: 'Asal Bahan Baku', accessor: 'asal_bahan_baku' },
+    { header: 'Total Penggunaan', accessor: 'total_penggunaan' },
+    { header: '', accessor: 'actions' },
   ];
-
-  /* const data: BahanBakuMainData[] = [
-    {
-      kode: '',
-      kode_transaksi_id: '',
-      kode_lini_produksi: '',
-      lini_produksi: 'Pupuk Perkebunan',
-      nama: 'Amonia',
-      tipe_bahan_baku: 'Amonia 10%',
-      jenis_bahan_baku: 'Daur Ulang',
-      asal_bahan_baku: 'Impor',
-      total_penggunaan: '50.489',
-      satuan: 'Ton',
-    },
-  ]; */
 
   if (isLoading)
     return (
