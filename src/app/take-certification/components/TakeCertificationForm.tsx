@@ -1,5 +1,7 @@
 import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
 import { useBahanBakuDetail } from '@/app/take-certification/hooks/useBahanBaku';
+import { useID } from '@/app/take-certification/hooks/useIdContext';
+import { BahanBakuData } from '@/app/take-certification/models/types';
 import {
   CategoryTabs,
   Input,
@@ -12,7 +14,7 @@ import {
   ExclamationTriangleIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export type TakeCertificationFormProps = ModalProps & {
@@ -24,10 +26,27 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   open,
   ...rest
 }) => {
+  const { getMockBahanBakuDetail } = useID();
+
   const [unit, setUnit] = useState(1);
 
-  const { data, setData, isLoading, error, setError, refetch } =
-    useBahanBakuDetail(open && kodeBahanBaku ? kodeBahanBaku : null);
+  // Detect mocked data
+  let kodeData = kodeBahanBaku;
+  const isMocked = kodeBahanBaku?.startsWith('00000000');
+  if (isMocked) kodeData = null;
+
+  const { data, setData, isLoading, setIsLoading, error, setError, refetch } =
+    useBahanBakuDetail(open && kodeData ? kodeData : null);
+
+  // Get mocked data
+  useEffect(() => {
+    if (isMocked) {
+      setData(getMockBahanBakuDetail(kodeBahanBaku!));
+      setIsLoading(false);
+      setError(null);
+      return;
+    }
+  }, [kodeBahanBaku]);
 
   const units = [
     { value: '1', label: 'Ton' },
@@ -113,6 +132,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
           <Select
             id="lini_produksi"
             name="lini_produksi"
+            value={data?.lini_produksi}
             options={[
               { value: '1', label: 'Besi' },
               { value: '2', label: 'Kayu' },
@@ -123,12 +143,17 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 
         <div>
           <label htmlFor="nama">Nama Bahan Baku</label>
-          <Input type="text" id="nama" name="nama" />
+          <Input type="text" id="nama" name="nama" value={data?.nama} />
         </div>
 
         <div>
           <label htmlFor="tipe_bahan_baku">Tipe Bahan Baku</label>
-          <Input type="text" id="tipe_bahan_baku" name="tipe_bahan_baku" />
+          <Input
+            type="text"
+            id="tipe_bahan_baku"
+            name="tipe_bahan_baku"
+            value={data?.tipe_bahan_baku}
+          />
         </div>
 
         <div>
@@ -137,6 +162,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
             id="satuan"
             name="satuan"
             options={units}
+            value={data?.satuan}
             onChange={(e) => setUnit(Number(e.target.value))}
           />
         </div>
@@ -150,6 +176,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
               { value: '1', label: 'Daur Ulang' },
               { value: '2', label: 'Non Daur Ulang' },
             ]}
+            value={data?.jenis_bahan_baku}
           />
         </div>
 
@@ -162,6 +189,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
               { value: '1', label: 'Impor' },
               { value: '2', label: 'Ekspor' },
             ]}
+            value={data?.asal_bahan_baku}
           />
         </div>
       </div>
@@ -227,6 +255,11 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
                                 )?.label
                               }
                             </span>
+                          }
+                          value={
+                            data?.[
+                              `bulan_${i}` as keyof BahanBakuData
+                            ] as string
                           }
                         />
                       </div>,

@@ -65,5 +65,5 @@ export const useBahanBakuDetail = (kodeBahanBaku: string | null) => {
     fetchData();
   }, [kodeBahanBaku]);
 
-  return { data, setData, isLoading, error, setError, refetch: fetchData };
+  return { data, setData, isLoading, setIsLoading, error, setError, refetch: fetchData };
 };

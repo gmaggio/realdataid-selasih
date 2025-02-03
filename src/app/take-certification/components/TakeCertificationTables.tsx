@@ -74,7 +74,6 @@ const TakeCertificationTables: React.FC = () => {
         >
           Retry fetching data
         </Button>
-
         <Button
           variants={{
             type: 'outlineAlt',

@@ -1,10 +1,14 @@
-import { BahanBakuMainData } from '@/app/take-certification/models/types';
+import {
+  BahanBakuData,
+  BahanBakuMainData,
+} from '@/app/take-certification/models/types';
 import { createContext, useContext, ReactNode } from 'react';
 
 interface IDContextProps {
   uuid_transaksi: string;
   uuid_user: string;
   mockBahanBakuList: BahanBakuMainData[];
+  getMockBahanBakuDetail: (id: string) => BahanBakuData;
 }
 
 const IDContext = createContext<IDContextProps | undefined>(undefined);
@@ -12,9 +16,10 @@ const IDContext = createContext<IDContextProps | undefined>(undefined);
 export const IDProvider = ({ children }: { children: ReactNode }) => {
   // Hardcoded values for testing purposes
   const value = {
-    uuid_transaksi: '0cc32c66-4c6f-47bd-ab04-09aacc67f738',
-    uuid_user: '00000000-0000-0000-0000-000123456789',
+    uuid_transaksi: uuidTransaksi,
+    uuid_user: uuidUser,
     mockBahanBakuList: mockBahanBakuList,
+    getMockBahanBakuDetail: getMockBahanBakuDetail,
   };
 
   return <IDContext.Provider value={value}>{children}</IDContext.Provider>;
@@ -30,11 +35,14 @@ export const useID = () => {
 
 /* TEMP: Hardcoded responses for testing purpose */
 
-const mockBahanBakuListBase = [
+const uuidTransaksi = '0cc32c66-4c6f-47bd-ab04-09aacc67f738';
+const uuidUser = '00000000-0000-0000-0000-000123456789';
+
+const mockBahanBakuListBase: BahanBakuMainData[] = [
   {
     kode: '00000000-0000-0000-0000-111111111111',
     kode_transaksi_id: '00000000-0000-0000-0000-aaaaaaaaaaaa',
-    kode_lini_produksi: '00000000-0000-0000-0000-999999999999',
+    kode_lini_produksi: '00000000-0000-0000-0000-bbbbbbbbbbbb',
     lini_produksi: 'Pupuk Perkebunan',
     nama: 'Amonia',
     tipe_bahan_baku: 'Amonia 20%',
@@ -44,9 +52,9 @@ const mockBahanBakuListBase = [
     satuan: 'Ton',
   },
   {
-    kode: '00000000-0000-0000-0000-111111111111',
+    kode: '00000000-0000-0000-0000-222222222222',
     kode_transaksi_id: '00000000-0000-0000-0000-aaaaaaaaaaaa',
-    kode_lini_produksi: '00000000-0000-0000-0000-999999999999',
+    kode_lini_produksi: '00000000-0000-0000-0000-bbbbbbbbbbbb',
     lini_produksi: 'Pupuk Perkebunan',
     nama: 'Amonia',
     tipe_bahan_baku: 'Amonia 10%',
@@ -61,3 +69,27 @@ const mockBahanBakuList = Array.from(
   { length: 5 },
   () => mockBahanBakuListBase,
 ).flat();
+
+const getMockBahanBakuDetail = (id: string) => {
+  const mainData = mockBahanBakuListBase.find((dat) => dat.kode === id);
+  if (!mainData) {
+    throw new Error(`BahanBaku with id ${id} not found`);
+  }
+  return {
+    ...mainData,
+    addition: [],
+    bulan_1: '1',
+    bulan_2: '1',
+    bulan_3: '1',
+    bulan_4: '1',
+    bulan_5: '1',
+    bulan_6: '1',
+    bulan_7: '1',
+    bulan_8: '1',
+    bulan_9: '1',
+    bulan_10: '1',
+    bulan_11: '1',
+    bulan_12: '1',
+    uuid_user: '00000000-0000-0000-0000-xxxxxxxxxxxx',
+  };
+};
