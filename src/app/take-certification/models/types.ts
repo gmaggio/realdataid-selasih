@@ -38,6 +38,6 @@ export interface BahanBakuID {
 }
 
 export interface SelectItemData {
-  kode: string;
+  kode: string | number;
   nama: string;
 }

@@ -1,6 +1,6 @@
-import { BahanBakuData, BahanBakuMainData } from '@/app/take-certification/models/types';
+import { BahanBakuData, BahanBakuMainData, SelectItemData } from '@/app/take-certification/models/types';
 import axios from 'axios';
-import { fetchBahanBaku, fetchBahanBakuDetail } from './api';
+import { fetchBahanBaku, fetchBahanBakuDetail, fetchBahanBakuSatuan, fetchLiniProduksi } from './api';
 
 export const getBahanBakuData = async (uuidTransaksi: string): Promise<BahanBakuMainData[]> => {
   try {
@@ -24,6 +24,28 @@ export const getBahanBakuDetail = async (kodeBahanBaku: string): Promise<BahanBa
     return response.data;
   } catch (error) {
     console.error("Failed to fetch Bahan Baku detail:", error);
+    throw error;
+  }
+};
+
+/* FORM OPTIONS DATA */
+
+export const getLiniProduksi = async (uuidTransaksi: string): Promise<SelectItemData[]> => {
+  try {
+    const response = await fetchLiniProduksi(uuidTransaksi);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch Lini Produksi:", error);
+    throw error;
+  }
+};
+
+export const getBahanBakuSatuan = async (): Promise<SelectItemData[]> => {
+  try {
+    const response = await fetchBahanBakuSatuan();
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch Satuan options:", error);
     throw error;
   }
 };

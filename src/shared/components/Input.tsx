@@ -37,8 +37,15 @@ const Input: React.FC<InputProps> = ({
     >
       {leading}
       <input
-        // size={50}
-        className={twMerge(clsx('w-full'), className)}
+        className={twMerge(
+          clsx(
+            'w-full',
+
+            // Remove spin-button
+            '[appearance:textfield]',
+          ),
+          className,
+        )}
         {...rest}
       />
       {trailing}

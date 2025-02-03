@@ -1,5 +1,6 @@
 import TakeCertificationFooter from '@/app/take-certification/components/TakeCertificationFooter';
 import { useBahanBakuDetail } from '@/app/take-certification/hooks/useBahanBaku';
+import { useFormSelections } from '@/app/take-certification/hooks/useFormSelections';
 import { useID } from '@/app/take-certification/hooks/useIdContext';
 import { BahanBakuData } from '@/app/take-certification/models/types';
 import {
@@ -24,9 +25,10 @@ export type TakeCertificationFormProps = ModalProps & {
 const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   kodeBahanBaku,
   open,
+  onClose,
   ...rest
 }) => {
-  const { getMockBahanBakuDetail } = useID();
+  const { uuid_transaksi, getMockBahanBakuDetail } = useID();
 
   const [unit, setUnit] = useState<string>('Ton');
 
@@ -34,6 +36,13 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
   let kodeData = kodeBahanBaku;
   const isMocked = kodeBahanBaku?.startsWith('00000000');
   if (isMocked) kodeData = null;
+
+  const {
+    liniProduksi,
+    // satuan,
+    isLoading: isLoadingSelections,
+    error: selectionError,
+  } = useFormSelections(uuid_transaksi);
 
   const { data, setData, isLoading, setIsLoading, error, setError, refetch } =
     useBahanBakuDetail(open && kodeData ? kodeData : null);
@@ -104,6 +113,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
       }}
       hasCloseButton
       open={open}
+      onClose={onClose}
       {...rest}
     >
       {(() => {
@@ -170,20 +180,22 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
         )}
       >
         <div>
-          <label htmlFor="lini_produksi">Lini Produksi</label>
+          <label htmlFor="lini_produksi">
+            Lini Produksi {liniProduksi.length}
+          </label>
           <Select
             id="lini_produksi"
             name="lini_produksi"
             value={data?.lini_produksi ?? ''}
-            options={[
-              { value: 'Besi', label: 'Besi' },
-              { value: 'Kayu', label: 'Kayu' },
-              { value: 'Tanah', label: 'Tanah' },
-            ]}
+            options={liniProduksi.map((item) => ({
+              value: item.kode,
+              label: item.nama,
+            }))}
             onChange={(e) =>
               setData((prev) => ({
                 ...prev!,
-                lini_produksi: e.target.value,
+                lini_produksi: e.target.options[e.target.selectedIndex].text,
+                kode_lini_produksi: e.target.value,
               }))
             }
           />
@@ -191,7 +203,18 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 
         <div>
           <label htmlFor="nama">Nama Bahan Baku</label>
-          <Input type="text" id="nama" name="nama" value={data?.nama ?? ''} />
+          <Input
+            type="text"
+            id="nama"
+            name="nama"
+            value={data?.nama ?? ''}
+            onChange={(e) =>
+              setData((prev) => ({
+                ...prev!,
+                nama: e.target.value,
+              }))
+            }
+          />
         </div>
 
         <div>
@@ -315,7 +338,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
                       <div key={`bulan-${i}`}>
                         <label htmlFor={`bulan_${i}`}>Bulan {i}</label>
                         <Input
-                          type="text"
+                          type="number"
                           id={`bulan-${i}`}
                           name={`bulan_${i}`}
                           placeholder="0"
@@ -329,9 +352,9 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
                             </span>
                           }
                           value={
-                            data?.[
+                            (data?.[
                               `bulan_${i}` as keyof BahanBakuData
-                            ] as string
+                            ] as string) ?? ''
                           }
                           onChange={(e) => {
                             setData((prev) => ({
@@ -365,7 +388,7 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
 
       <TakeCertificationFooter
         classClass={clsx('px-3.5! py-2.5')}
-        onCancel={() => console.log('cancel')}
+        onCancel={onClose}
         onSaveDraft={() => console.log('save draft')}
         onNext={() => console.log('next')}
       />

@@ -57,16 +57,16 @@ export const uploadFile = async (file: File, uuidUser: string): Promise<ApiRespo
   return response.data;
 };
 
-/* FORM DATA */
+/* FORM OPTIONS DATA */
 
 // Get Lini Produksi
-export const fetchLiniProduksi = async (uuidTransaksi: string): Promise<ApiResponse<SelectItemData>> => {
+export const fetchLiniProduksi = async (uuidTransaksi: string): Promise<ApiResponse<SelectItemData[]>> => {
   const response = await apiClient.post('/lini-produksi/select', { uuid_transaksi: uuidTransaksi });
   return response.data;
 };
 
 // Get Bahan Baku Satuan
-export const fetchBahanBakuSatuan = async (uuidTransaksi: string): Promise<ApiResponse<SelectItemData>> => {
-  const response = await apiClient.post('/bahan-baku-utama/satuan', { uuid_transaksi: uuidTransaksi });
+export const fetchBahanBakuSatuan = async (): Promise<ApiResponse<SelectItemData[]>> => {
+  const response = await apiClient.post('/bahan-baku-utama/satuan');
   return response.data;
 };
