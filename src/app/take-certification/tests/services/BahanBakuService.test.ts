@@ -17,8 +17,8 @@ describe('Service Tests: getBahanBakuData', () => {
   });
 
   it('handles API errors properly', async () => {
-    (fetchBahanBaku as jest.Mock).mockRejectedValue(new Error('API Error'));
+    (fetchBahanBaku as jest.Mock).mockRejectedValue(new Error());
 
-    await expect(getBahanBakuData('test-uuid')).rejects.toThrow('API Error');
+    await expect(getBahanBakuData('test-uuid')).rejects.toThrow('An unexpected error occurred.');
   });
 });

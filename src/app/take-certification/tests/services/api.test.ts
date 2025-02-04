@@ -11,14 +11,12 @@ describe('API Tests', () => {
 
     const mockedFetchBahanBaku = fetchBahanBaku as jest.MockedFunction<typeof fetchBahanBaku>;
 
-    mockedFetchBahanBaku.mockResolvedValue(mockAxiosResponse as AxiosResponse);
+    mockedFetchBahanBaku.mockResolvedValue(mockAxiosResponse.data);
 
     const result = await fetchBahanBaku(mockTransactionID);
 
-    const data = result.data;
-
-    expect(data.code).toBe(200);
-    expect(data.message).toBe('Success');
-    expect(data.data).toEqual(mockBahanBakuData);
+    expect(result.code).toBe(200);
+    expect(result.message).toBe('Success');
+    expect(result.data).toEqual(mockBahanBakuData);
   });
 });
