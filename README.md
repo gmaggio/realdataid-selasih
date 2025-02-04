@@ -16,6 +16,11 @@ Gunakan perintah berikut untuk menjalankan server pengembangan:
 yarn dev
 ```
 
+Aplikasi akan berjalan di:
+
+- Local: <http://localhost:3000>
+- Network: <http://10.2.0.2:3000>
+
 ## 🧪 Pengujian dengan Data Dummy (Mock Data)
 
 Jika endpoint API **belum tersedia** atau **tidak berfungsi**, Anda bisa **menguji aplikasi dengan data dummy**:
