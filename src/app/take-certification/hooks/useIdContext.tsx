@@ -83,7 +83,7 @@ const mockBahanBakuList = Array.from({ length: 5 }, (_, index) => {
 }).flat();
 
 const getMockBahanBakuDetail = (id: string) => {
-  const mainData = mockBahanBakuListBase.find((dat) => dat.kode === id);
+  const mainData = mockBahanBakuList.find((dat) => dat.kode === id);
   if (!mainData) {
     throw new Error(`BahanBaku with id ${id} not found`);
   }

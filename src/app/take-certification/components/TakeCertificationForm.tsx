@@ -52,9 +52,10 @@ const TakeCertificationForm: React.FC<TakeCertificationFormProps> = ({
     setError: setSelectionsError,
   } = useFormSelections(uuid_transaksi);
 
-  // Detect mocked data
   let kodeData = kodeBahanBaku;
   let liniProduksi = liniProduksiData;
+
+  // Detect mocked data
   const isMocked = kodeBahanBaku?.startsWith('00000000');
   if (isMocked) {
     kodeData = null;
