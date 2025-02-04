@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Selasih Admin
 
-## Getting Started
+## 💪 Instalasi
 
-First, run the development server:
+Jalankan perintah berikut untuk menginstal dependensi proyek:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```sh
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔥 Menjalankan Server Pengembangan
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Gunakan perintah berikut untuk menjalankan server pengembangan:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+yarn dev
+```
 
-## Learn More
+## 🧪 Pengujian dengan Data Dummy (Mock Data)
 
-To learn more about Next.js, take a look at the following resources:
+Jika endpoint API **belum tersedia** atau **tidak berfungsi**, Anda bisa **menguji aplikasi dengan data dummy**:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Jalankan aplikasi (`yarn dev`).
+2. Pada tampilan halaman utama, tombol **"Use mock data instead"** akan muncul hanya jika API gagal diakses..
+3. Aplikasi akan menggunakan data statis (hardcoded) untuk pengujian.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚧 **Pembaruan Selanjutnya**
 
-## Deploy on Vercel
+Kami akan memperbarui dokumentasi setelah mendapatkan data mock dari API untuk:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `uuid_transaksi`
+- `uuid_user`
+- Token (jika diperlukan)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+📌 **Catatan**: Pastikan untuk selalu menarik (pull) pembaruan terbaru sebelum menjalankan proyek.
+
+```sh
+git pull origin main
+```
+
+🔥 **Selamat mengembangkan!** 🚀
